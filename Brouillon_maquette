@@ -1,0 +1,13 @@
+ss -lptn 'sport = :8080' -> récup pid -> kill -9 PID
+
+Page d'accueil -> Entrée des informations de vol sans connexion. Bouton de connexion top-right avec option utilisateur ou admin qui ouvre un <dialog> + bouton "all notam" dans <nav>
+Page de compte user -> permet d'ajouter et de gérer ses vols, et d'avoir accès aux notams associés : lignes "dest-arr [Avion]         <Voir NOTAM> <Modifier> <Supprimer>". Bouton ajouter pour un vol : <dialog>, auto complétion des aéroports (bonus : bouton de demande d'ajout d'aéroport)
+Page de compte admin -> Permet d'ajouter et gérer des notam + ajouter aéroports. A réfléchir
+Page de notams -> liste des notams dans une div scrollable (voir plus bas), boutons plus d'info, et modifier pour les admins
+
+Scrollable div : 
+<div style="overflow-y: scroll; height: 400px; background-color: red">
+      <p>lala</p>
+      <p>lala</p>
+      <p>lala</p>
+    </div>
