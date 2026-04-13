@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS Vol
     typeVol VARCHAR(20),
     nomVol VARCHAR(20),
     idUser INT,
-    idDepart INT,
-    idArrivee INT,
+    idDepart VARCHAR(20),
+    idArrivee VARCHAR(20),
     date_depart DATETIME,
     date_arrivee DATETIME,
     PRIMARY KEY (idVol),
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS Notam
 (
     idNotam VARCHAR(20) NOT NULL,
     typeNotam ENUM('NOTAMR','NOTAMN','NOTAMC'),
-    date_declaration DATE,
+    date_declaration DATETIME,
     date_debut DATETIME,
     date_fin DATETIME,
     creneau VARCHAR(20),
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Notam
     limite_inferieur VARCHAR(20),
     limite_superieur VARCHAR(20),
     typeVol VARCHAR(20),
-    idAerodrome INT,
+    idAerodrome VARCHAR(20),
     idUser INT,
     idObjet INT,
     PRIMARY KEY (idNotam),
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS degagement_vol
 (
     idDV INT NOT NULL AUTO_INCREMENT,
     idVol INT,
-    idDegagement INT,
+    idDegagement VARCHAR(20),
     PRIMARY KEY (idDV),
     FOREIGN KEY (idVol) REFERENCES Vol(idVol),
     FOREIGN KEY (idDegagement) REFERENCES Aerodrome(idAerodrome)
