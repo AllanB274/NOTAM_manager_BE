@@ -7,6 +7,8 @@ Page de notams -> liste des notams dans une div scrollable (voir plus bas), bout
 
 ATTENTION : transmettre les login entre les pages -> cookies page 111-113
 
+Page de notam -> boutons qui s'affichent suivant admin ou non
+
 Scrollable div : 
 <div style="overflow-y: scroll; height: 400px; background-color: red">
       <p>lala</p>
