@@ -5,7 +5,7 @@ Page de compte user -> permet d'ajouter et de gérer ses vols, et d'avoir accès
 Page de compte admin -> Permet d'ajouter et gérer des notam + ajouter aéroports. A réfléchir
 Page de notams -> liste des notams dans une div scrollable (voir plus bas), boutons plus d'info, et modifier pour les admins
 
-ATTENTION : transmettre les login entre les pages
+ATTENTION : transmettre les login entre les pages -> cookies page 111-113
 
 Scrollable div : 
 <div style="overflow-y: scroll; height: 400px; background-color: red">
