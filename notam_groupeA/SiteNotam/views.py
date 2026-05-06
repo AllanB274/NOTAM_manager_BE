@@ -10,7 +10,7 @@ app.config.from_object('SiteNotam.config')
 def index(): 
     return render_template("index.html")
 
-# page se connecter
+# page notams
 @app.route("/notam")
 def notam():
     return render_template("notam.html")
@@ -20,7 +20,7 @@ def notam():
 def vols():
     return render_template("vols.html")
 
-# gestion des fichiers
+# voir son compte
 @app.route("/compte")
 def compte():
     return render_template("compte.html")

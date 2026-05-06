@@ -1,0 +1,36 @@
+<div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="site-nav">
+      <div class="container">
+        <div class="menu-bg-wrap">
+          <div class="site-navigation">
+            <a href="/" class="logo m-0 float-start">NOTAMEase</a>
+
+            <ul
+              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
+            >
+              <li class="{{ 'active' if request.endpoint == 'index' else '' }}"><a href="/">Home</a></li>
+              <li class="{{ 'active' if request.endpoint == 'notams' else '' }}"><a href="/">Notams</a></li>
+              <li class="{{ 'active' if request.endpoint == 'vols' else '' }}"><a href="/">Vols</a></li>
+              <li class="{{ 'active' if request.endpoint == 'compte' else '' }}"><a href="/compte">Log In</a></li>
+            </ul>
+
+            <a
+              href="#"
+              class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            >
+              <span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
