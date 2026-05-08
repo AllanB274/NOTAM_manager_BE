@@ -17,6 +17,6 @@ DB_SERVER = {
         "password": "mysql",
         "host": "localhost",
         "port": 3306, #8889 si MAC
-        "database": "PLACEHOLDER A CHANGER QUAND LES ZIGOTOS AURONT FINIS",  # nom de la BDD
+        "database": "Notam_BDD.sql",  # nom de la BDD
         "raise_on_warnings": True
     }

@@ -20,7 +20,12 @@ def notam():
 def vols():
     return render_template("vols.html")
 
-# voir son compte
+# log in
 @app.route("/compte")
 def compte():
     return render_template("compte.html")
+
+# sign in
+@app.route("/signin")
+def signin():
+    return render_template("signin.html")
