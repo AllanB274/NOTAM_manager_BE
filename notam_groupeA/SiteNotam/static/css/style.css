@@ -9780,19 +9780,19 @@ textarea {
     z-index: 2; }
 
 .btn {
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none !important;
   border-radius: 30px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 30px;
-  padding-right: 30px;
-  border-width: 2px;
-  border-color: transparent;
+  padding: 15px 30px;
   border: none !important;
-  top: 0;
   position: relative;
-  -webkit-transition: .3s all ease;
-  -o-transition: .3s all ease;
+  top: 0;
+  background: #005555;
+  color: #fff;
+  line-height: 1.2;
+  white-space: nowrap;
   transition: .3s all ease; }
   .btn.btn-primary {
     background: #005555;
