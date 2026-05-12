@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS User
     login VARCHAR(30),
     role ENUM('admin','client'),
     PRIMARY KEY (idUser)
-) ENGINE=InnoDB CHARSET=utf8;
+) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS Aerodrome
 (
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Aerodrome
     ville VARCHAR(20),
     pays VARCHAR(20),
     PRIMARY KEY (idAerodrome)
-) ENGINE=InnoDB CHARSET=utf8;
+) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS Vol
 (
@@ -38,14 +38,14 @@ CREATE TABLE IF NOT EXISTS Vol
     FOREIGN KEY (idUser) REFERENCES User(idUser),
     FOREIGN KEY (idDepart) REFERENCES Aerodrome(idAerodrome),
     FOREIGN KEY (idArrivee) REFERENCES Aerodrome(idAerodrome)
-) ENGINE=InnoDB CHARSET=utf8;
+) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS Objets
 (
     idObjet INT NOT NULL AUTO_INCREMENT,
     nomObjet VARCHAR(20),
     PRIMARY KEY (idObjet)
-) ENGINE=InnoDB CHARSET=utf8;
+) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS Notam
 (
@@ -59,16 +59,14 @@ CREATE TABLE IF NOT EXISTS Notam
     limite_inferieur VARCHAR(5),
     limite_superieur VARCHAR(5),
     typeVol ENUM('I','V','IV'),
-    idAerodrome VARCHAR(4)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+    idAerodrome VARCHAR(4),
     idUser INT,
     idObjet INT,
     PRIMARY KEY (idNotam),
-    FOREIGN KEY (idAerodrome) REFERENCES Aerodrome(idAerodrome),
+    FOREIGN KEY (idAerodrome) REFERENCES Aerodrome(idAerodrome) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (idUser) REFERENCES User(idUser),
     FOREIGN KEY (idObjet) REFERENCES Objets(idObjet)
-) ENGINE=InnoDB CHARSET=utf8;
+) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS degagement_vol
 (
@@ -78,7 +76,7 @@ CREATE TABLE IF NOT EXISTS degagement_vol
     PRIMARY KEY (idDV),
     FOREIGN KEY (idVol) REFERENCES Vol(idVol),
     FOREIGN KEY (idDegagement) REFERENCES Aerodrome(idAerodrome)
-) ENGINE=InnoDB CHARSET=utf8;
+) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS Vol_User
 (
@@ -88,5 +86,5 @@ CREATE TABLE IF NOT EXISTS Vol_User
     PRIMARY KEY (idVU),
     FOREIGN KEY (idVol) REFERENCES Vol(idVol),
     FOREIGN KEY (idUser) REFERENCES User(idUser)
-) ENGINE=InnoDB CHARSET=utf8;
+) ENGINE=InnoDB CHARSET=utf8mb4;
 
