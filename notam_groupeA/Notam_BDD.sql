@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS User
 
 CREATE TABLE IF NOT EXISTS Aerodrome
 (
-    idAerodrome VARCHAR(4) NOT NULL,
+    idAerodrome INT NOT NULL AUTO_INCREMENT,
+    codeAerodrome VARCHAR(4) NOT NULL,
     nomAerodrome VARCHAR(20),
     region VARCHAR(20),
     departement VARCHAR(20),
@@ -30,8 +31,8 @@ CREATE TABLE IF NOT EXISTS Vol
     typeVol ENUM('I','V','IV'),
     nomVol VARCHAR(20),
     idUser INT,
-    idDepart VARCHAR(4),
-    idArrivee VARCHAR(4),
+    idDepart INT,
+    idArrivee INT,
     date_depart DATETIME,
     date_arrivee DATETIME,
     PRIMARY KEY (idVol),
@@ -59,7 +60,7 @@ CREATE TABLE IF NOT EXISTS Notam
     limite_inferieur VARCHAR(5),
     limite_superieur VARCHAR(5),
     typeVol ENUM('I','V','IV'),
-    idAerodrome VARCHAR(4),
+    idAerodrome INT,
     idUser INT,
     idObjet INT,
     PRIMARY KEY (idNotam),
@@ -72,7 +73,7 @@ CREATE TABLE IF NOT EXISTS degagement_vol
 (
     idDV INT NOT NULL AUTO_INCREMENT,
     idVol INT,
-    idDegagement VARCHAR(5),
+    idDegagement INT,
     PRIMARY KEY (idDV),
     FOREIGN KEY (idVol) REFERENCES Vol(idVol),
     FOREIGN KEY (idDegagement) REFERENCES Aerodrome(idAerodrome)
