@@ -17,6 +17,15 @@ DB_SERVER = {
         "password": "mysql",
         "host": "localhost",
         "port": 3306, #8889 si MAC
-        "database": "Notam_BDD.sql",  # nom de la BDD
+        "database": "Notam_BDD",  # nom de la BDD
         "raise_on_warnings": True
     }
+
+COLOR ={
+  'header' : '\033[95m',
+  'blue' : '\033[94m',
+  'green' : '\033[92m',
+  'orange' : '\033[93m',
+  'red' : '\033[31m',
+  'end' : '\033[0m',
+}
