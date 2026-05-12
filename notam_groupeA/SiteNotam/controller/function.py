@@ -16,7 +16,6 @@ def statuts_obligatoires(*statuts_autorises):
                 # Redirection selon le rôle
                 routes = {
                     "administrateur": "/vols",
-                    "gestionnaire": "/vols",
                     "pilote": "/vols"
                 }
                 route_suivante = routes.get(session['statut'], "/")
