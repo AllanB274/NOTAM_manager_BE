@@ -1,5 +1,16 @@
+<<<<<<< HEAD
+import secrets
+import string
+import hashlib
+from flask import flash
+import hashlib
+
+
+from flask import Flask, render_template, request, redirect, session, jsonify
+=======
 from flask import Flask, flash, render_template, request, redirect, session, send_file
 from .model import bdd as bdd
+>>>>>>> 2dd6b622aa429232891ce5c414efe8a85fc61c40
 app = Flask(__name__)
 
 app.template_folder = "template"
@@ -31,6 +42,41 @@ def compte():
 def signin():
     return render_template("signin.html")
 
+
+
+
+@app.route("/addmdp")
+def addmdp():
+    rform = request.form
+    msg={
+        "ok": "Mot de passe valide",
+        "echec" : "Mot de passe invalide"
+    }
+    
+    #genere mdp aléatoire de 5 caractères
+    caracteres = string.ascii_letters + string.digits
+    mdp = ''.join(secrets.choice(caracteres) for _ in range(5))
+    print("Mot de passe généré:", mdp)
+    
+    #Chiffrement SHA-256
+    mdp_hash = hashlib.sha256(mdp.encode()).hexdigest()
+    print("Mot de passe chiffré:", mdp_hash)
+   
+    
+    #création user
+    idUser = bdd.add_userData(rform, mdp_hash, msg)
+    print(idUser)
+    flash(mdp)
+    return redirect("/modifMdp")
+
+
+@app.route("/modifMdp")
+def modifMdp():
+    return render_template("modifMdp.html")
+
+def verifAuth(login, mdp):
+    mdp = hashlib.sha256(mdp.encode())
+    mdpC = mdp.hexdigest() #mot de passe chiffré
 #la connexion
 @app.route("/connexion", methods=["POST"])
 def connect():
