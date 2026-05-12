@@ -89,3 +89,27 @@ CREATE TABLE IF NOT EXISTS Vol_User
     FOREIGN KEY (idUser) REFERENCES User(idUser)
 ) ENGINE=InnoDB CHARSET=utf8mb4;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO User (prenom,nom,mdp,login,role)
+VALUES
+('Luc','Leugotte','5678', 'Lu', 'admin'),
+('Allan','Gromolet','1234', 'Al', 'client');
+
+INSERT INTO Aerodrome (codeAerodrome,nomAerodrome,region,departement,ville,pays)
+VALUES
+('LFBO','Blagnac','jsp','sud','Toulouse','France'),
+('LFLC','Aeroport de clermont ferrand','Auvergne','Puy de domes','Clermont Ferrand','France'),
+('LFBO','Merignac','ouest','pres de la mer', 'Bordeau','France');
+
