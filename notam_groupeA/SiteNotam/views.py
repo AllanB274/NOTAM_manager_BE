@@ -42,7 +42,8 @@ def compte():
 def signin():
     return render_template("signin.html")
 
-
+@app.route("/vols")
+@f.statuts_obligatoires('administrateur', 'gestionnaire')
 
 
 @app.route("/addmdp")
