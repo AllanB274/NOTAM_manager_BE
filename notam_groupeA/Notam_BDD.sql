@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS User
     idUser INT NOT NULL AUTO_INCREMENT,
     prenom VARCHAR(20),
     nom VARCHAR(20),
+    mdp VARCHAR(30),
+    login VARCHAR(30),
     role ENUM('admin','client'),
     PRIMARY KEY (idUser)
 ) ENGINE=InnoDB CHARSET=utf8;
