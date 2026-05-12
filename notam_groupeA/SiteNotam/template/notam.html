@@ -26,18 +26,18 @@
             <!-- <div id="filtre">
 
             </div> -->
-                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col">
-                    <div style="overflow-y: scroll; height: 60vh;background-color: rgba(240, 240, 250, 0.9); margin: 0em">
-                        <p>lala</p>
-                        <p>lala</p>
-                        <p>lala</p>
+                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
+                    <div style="overflow-y: scroll; height: 60vh;background-color: rgba(240, 240, 250, 0.9)">
+                        {%for i in range(100)%}
+                        <p>Notam {{i}}</p>
+                        {% endfor %}
                     </div>
                 </div>
-                <div id="airports" style="background-color: rgba(43, 43, 43, 0.5); width:25%;" class="col">
-                    <div style="overflow-y: scroll; height: 60vh;background-color: rgba(200, 210, 200, 0.9); margin:0em">
-                        <p>lala</p>
-                        <p>lala</p>
-                        <p>lala</p>
+                <div id="airports" style="background-color: rgba(43, 43, 43, 0.5); width:25%;" class="col-4">
+                    <div style="overflow-y: scroll; height: 60vh;background-color: rgba(240, 240, 250, 0.9)">
+                        {%for i in range(100)%}
+                        <p>Aéroport {{i}}</p>
+                        {% endfor %}
                     </div>
                 </div>
         </div>
