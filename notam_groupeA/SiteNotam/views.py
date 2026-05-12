@@ -3,7 +3,7 @@ import secrets
 import string
 import hashlib
 from flask import flash
-
+import hashlib
 
 
 from flask import Flask, render_template, request, redirect, session, jsonify
@@ -73,6 +73,10 @@ def addmdp():
 @app.route("/modifMdp")
 def modifMdp():
     return render_template("modifMdp.html")
+
+def verifAuth(login, mdp):
+    mdp = hashlib.sha256(mdp.encode())
+    mdpC = mdp.hexdigest() #mot de passe chiffré
 #la connexion
 @app.route("/connexion", methods=["POST"])
 def connect():
