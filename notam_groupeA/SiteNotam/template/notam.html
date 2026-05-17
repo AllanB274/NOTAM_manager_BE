@@ -22,16 +22,30 @@
 
             </div> -->
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
-                    <div style="overflow-y: scroll; height: 60vh;background-color: rgba(240, 240, 250, 0.9)">
+                    <div style="overflow-y: scroll; height: 60vh;">
                         {%for i in range(100)%}
-                        <p>Notam {{i}}</p>
+                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
+                        <div class="col text-truncate">Notam {{i}} - [compléter avec requete]</div>
+                        <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
+                        {% if session['statut']!='client' %}
+                        <button class="col-auto px-2"><i class="bi bi-pencil-square"></i></button>
+                        <button class="col-auto px-2"><i class="bi bi-trash"></i></button>
+                        {% endif %}
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
                 <div id="airports" style="background-color: rgba(43, 43, 43, 0.5); width:25%;" class="col-4">
-                    <div style="overflow-y: scroll; height: 60vh;background-color: rgba(240, 240, 250, 0.9)">
+                    <div style="overflow-y: scroll; height: 60vh;">
                         {%for i in range(100)%}
-                        <p>Aéroport {{i}}</p>
+                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
+                        <div class="col text-truncate">Aéroport {{i}} - [compléter avec requete]</div>
+                        <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
+                        {% if session['statut']!='client' %}
+                        <button class="col-auto px-2"><i class="bi bi-pencil-square"></i></button>
+                        <button class="col-auto px-2"><i class="bi bi-trash"></i></button>
+                        {% endif %}
+                        </div>
                         {% endfor %}
                     </div>
                 </div>

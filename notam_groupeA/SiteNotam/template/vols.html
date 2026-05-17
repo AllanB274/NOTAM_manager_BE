@@ -36,12 +36,12 @@
                     <div style="overflow-y: scroll; height: 60vh;">
                         <!-- On affiche que les vols de l'utilisateur OU tout si admin -->
                         {%for i in range(100)%}
-                        <div class="row justify-content-center align-items-center" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
-                        <div class="col-{% if session['statut']!='client' %}9{% else %}10{% endif %}">Vol {{i}} - [compléter avec requete]</div>
-                        <button class="col-{% if session['statut']!='client' %}1{% else %}2{% endif %}"><i class="bi bi-eye"></i></button>
+                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
+                        <div class="col text-truncate">Vol {{i}} - [compléter avec requete]</div>
+                        <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
                         {% if session['statut']!='client' %}
-                        <button class="col-1"><i class="bi bi-pencil-square"></i></button>
-                        <button class="col-1"><i class="bi bi-trash"></i></button>
+                        <button class="col-auto px-2"><i class="bi bi-pencil-square"></i></button>
+                        <button class="col-auto px-2"><i class="bi bi-trash"></i></button>
                         {% endif %}
                         </div>
                         {% endfor %}
