@@ -1,5 +1,6 @@
 from . import bddGen
 import inspect
+import hashlib
 
 # -----------------------------------
 # Retourne le nom de la fonction courante
@@ -17,6 +18,8 @@ def get_membresData():
     return bddGen.selectData(func_name(),sql, param,  None)
 
 def verifAuthData(login, mdp):
+    mdp = hashlib.sha256(mdp.encode())
+    mdpC = mdp.hexdigest() #mot de passe chiffré
     sql = "SELECT * FROM user where login=%s and mdp=%s"
-    param = (login, mdp)
+    param = (login, mdpC)
     return bddGen.selectOneData(func_name(), sql, param)

@@ -34,12 +34,15 @@
             </div> -->
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
                     <div style="overflow-y: scroll; height: 60vh;">
+                        <!-- On affiche que les vols de l'utilisateur OU tout si admin -->
                         {%for i in range(100)%}
                         <div class="row justify-content-center align-items-center" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
-                        <div class="col-9">Vol {{i}} - [compléter avec requete]</div>
-                        <button class="col-1"><i class="bi bi-eye"></i></button>
+                        <div class="col-{% if session['statut']!='client' %}9{% else %}10{% endif %}">Vol {{i}} - [compléter avec requete]</div>
+                        <button class="col-{% if session['statut']!='client' %}1{% else %}2{% endif %}"><i class="bi bi-eye"></i></button>
+                        {% if session['statut']!='client' %}
                         <button class="col-1"><i class="bi bi-pencil-square"></i></button>
                         <button class="col-1"><i class="bi bi-trash"></i></button>
+                        {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -47,17 +50,8 @@
         </div>
     </div>
 </div>
-<script src="/static/js/bootstrap.bundle.min.js"></script>
-<script src="/static/js/tiny-slider.js"></script>
-<script src="/static/js/aos.js"></script>
-<script src="/static/js/navbar.js"></script>
-<script src="/static/js/counter.js"></script>
-<script src="/static/js/custom.js"></script>
-</body>
-</html>
 
-<body>
-{% include("layout/navbar.html") %}
+<!-- Résultat du clic pour voir le vol -> potentiel condition Jinja pour cacher cette partie -->
 
 <div class="hero">
     {% include("layout/bgimg.html") %}
