@@ -14,12 +14,7 @@
     {% include("layout/navbar.html") %}
 
     <div class="hero">
-      <div class="hero-slide">
-        <div
-          class="img overlay"
-          style="background-image: url('static/img/imagepage1finie.png')"
-        ></div>
-      </div>
+      {% include("layout/bgimg.html") %}
 
       <div class="container">
         <div class="row justify-content-center align-items-center">
@@ -28,18 +23,23 @@
               Log in
             </h1>
             <form
-              action="#"
+              action="/connexion"
               class="narrow-w form-search d-flex align-items-stretch mb-3"
               data-aos="fade-up"
               data-aos-delay="200"
+              method="post"
             >
               <input
                 type="text"
+                name="login"
+                id="login"
                 class="form-control px-4"
                 placeholder="Username"
               />
               <input
                 type="text"
+                name="mdp"
+                id="mdp"
                 class="form-control px-4"
                 placeholder="Password"
               />

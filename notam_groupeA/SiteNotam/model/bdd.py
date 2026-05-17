@@ -17,6 +17,6 @@ def get_membresData():
     return bddGen.selectData(func_name(),sql, param,  None)
 
 def verifAuthData(login, mdp):
-    sql = "SELECT * FROM idUser where login=%s and mdp=%s"
+    sql = "SELECT * FROM user where login=%s and mdp=%s"
     param = (login, mdp)
     return bddGen.selectOneData(func_name(), sql, param)

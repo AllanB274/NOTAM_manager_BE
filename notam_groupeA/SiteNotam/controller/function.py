@@ -9,7 +9,7 @@ def statuts_obligatoires(*statuts_autorises):
             # Vérifie que l'utilisateur est connecté
             if 'idUser' not in session or 'statut' not in session:
                 flash("Vous devez être connecté pour accéder à cette page.", "danger")
-                return redirect("/connecter")
+                return redirect("/compte")
             # Vérifie que le rôle est autorisé
             if session['statut'] not in statuts_autorises:
                 flash("Vous n'avez pas les droits pour accéder à cette page.", "danger")

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import secrets
 import string
 import hashlib
@@ -6,11 +5,9 @@ from flask import flash
 import hashlib
 
 
-from flask import Flask, render_template, request, redirect, session, jsonify
-=======
-from flask import Flask, flash, render_template, request, redirect, session, send_file
+from flask import Flask, flash, render_template, request, redirect, session, send_file, jsonify
 from .model import bdd as bdd
->>>>>>> 2dd6b622aa429232891ce5c414efe8a85fc61c40
+from .controller import function as f
 app = Flask(__name__)
 
 app.template_folder = "template"
@@ -29,6 +26,7 @@ def notam():
 
 # page sgbd
 @app.route("/vols")
+@f.statuts_obligatoires('admin', 'gestion', 'client')
 def vols():
     return render_template("vols.html")
 
@@ -41,9 +39,6 @@ def compte():
 @app.route("/signin")
 def signin():
     return render_template("signin.html")
-
-@app.route("/vols")
-@f.statuts_obligatoires('administrateur', 'gestionnaire')
 
 
 @app.route("/addmdp")
@@ -90,20 +85,20 @@ def connect():
         session["idUser"] = user["idUser"]
         session["nom"] = user["nom"]
         session["prenom"] = user["prenom"]
-        session["mail"] = user["mail"]
+        # session["mail"] = user["mail"]
         session['login'] = user['login']
-        session["statut"] = user["statut"]
-        session["avatar"] = user["avatar"]
+        session["statut"] = user["role"]
+        # session["avatar"] = user["avatar"]
         flash("Authentification réussie", "success")
         return redirect("/vols")
     except TypeError as err:
         #Refus
         flash("Authentification refusée", "danger")
-        return redirect("/login")
+        return redirect("/compte")
 
 #la déconnexion
 @app.route("/deco")
 def deco():
     session.clear()
-    flash("Casse-toi et reviens plus jamais fdp", "primary")
+    flash("Vous êtes bien déconnecté.", "primary")
     return redirect("/compte")
