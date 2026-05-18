@@ -32,7 +32,7 @@ def update_mdpData(login, oldmdp, newmdp):
 
 
 
-def add_membreData(rform, msg=None):
+def add_userData(rform, msg=None):
     sql = """ INSERT INTO User(prenom, nom, mdp, login, role)
     VALUES (%s, %s, %s, %s, %s); """
     param = ( rform['prenom'], rform['nom'], rform['mdp'], rform['login'], rform['role'] )

@@ -70,7 +70,7 @@ def addmdp():
     return redirect("/modifMdp")
 
 
-@app.route("/modifMdp")
+@app.route("/modifMdp", methods=["POST"])
 def modifMdp():
     return render_template("modifMdp.html")
 

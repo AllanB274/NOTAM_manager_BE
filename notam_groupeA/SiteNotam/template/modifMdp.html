@@ -1,31 +1,59 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>Modifier le mot de passe</title>
-</head>
-<body>
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% set titre="Login" %}
+    {% include("layout/head.html") %}
+  </head>
+  <body>
+    {% include("layout/navbar.html") %}
 
-    <h1>Modification du mot de passe</h1>
+    <div class="hero">
+      {% include("layout/bgimg.html") %}
 
-    <form action="/modifMdp" method="POST">
-        <label for="ancienMdp">Ancien mot de passe :</label>
-        <input type="password" name="ancienMdp" id="ancienMdp" required>
-
-        <br><br>
-
-        <label for="nouveauMdp">Nouveau mot de passe :</label>
-        <input type="password" name="nouveauMdp" id="nouveauMdp" required>
-
-        <br><br>
-
-        <label for="confirmMdp">Confirmer votre mot de passe :</label>
-        <input type="password" name="confirmMdp" id="confirmMdp" required>
-
-        <br><br>
-
-        <button type="submit">Modifier</button>
-    </form>
-
-</body>
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center">
+            <h1 class="heading" data-aos="fade-up">
+              Log in
+            </h1>
+            <form
+              action="/connexion"
+              class="narrow-w form-search d-flex align-items-stretch mb-3"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              method="post"
+            >
+              <input
+                type="text"
+                name="oldmdp"
+                id="oldmdp"
+                class="form-control px-4"
+                placeholder="Current password"
+              />
+              <input
+                type="text"
+                name="newmdp"
+                id="newmdp"
+                class="form-control px-4"
+                placeholder="New password"
+              />
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/tiny-slider.js"></script>
+    <script src="/static/js/aos.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/counter.js"></script>
+    <script src="/static/js/custom.js"></script>
+  </body>
 </html>
