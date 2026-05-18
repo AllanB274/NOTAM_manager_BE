@@ -34,7 +34,7 @@ def add_membreData(rform, msg=None):
     sql = """ INSERT INTO identification
     (nom, prenom, login, mdp, role, avatar)
     VALUES (%s, %s, %s, %s, %s, %s, %s); """
-    param = ( rform['lastname'], rform['pfirstname'], rform['username'], rform['mdp'],
+    param = ( rform['lastname'], rform['firstname'], rform['username'], rform['mdp'],
     rform['role'], rform['avatar'] )
     return bddGen.addData(func_name(), sql, param, msg)
 
