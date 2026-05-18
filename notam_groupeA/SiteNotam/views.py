@@ -40,6 +40,10 @@ def compte():
 def signin():
     return render_template("signin.html")
 
+# about us
+@app.route("/aboutus")
+def aboutus():
+    return render_template("aboutus.html")
 
 @app.route("/addmdp")
 def addmdp():
