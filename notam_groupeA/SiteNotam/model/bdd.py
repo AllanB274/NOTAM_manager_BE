@@ -20,14 +20,20 @@ def get_membresData():
 def verifAuthData(login, mdp):
     mdp = hashlib.sha256(mdp.encode())
     mdpC = mdp.hexdigest() #mot de passe chiffré
-    sql = "SELECT * FROM user where login=%s and mdp=%s"
+    sql = "SELECT * FROM User where login=%s and mdp=%s"
     param = (login, mdpC)
     return bddGen.selectOneData(func_name(), sql, param)
 
 
+def update_nomData(idUser, newmdp):
+  sql = "UPDATE User SET mdp=%s WHERE idUser=%s;"
+  param = (newmdp, idUser)
+  return bddGen.updateData(func_name(), sql, param, None)
+
+
 
 def add_membreData(rform, msg=None):
-   sql = """ INSERT INTO user(prenom, nom, mdp, login, role)
+   sql = """ INSERT INTO User(prenom, nom, mdp, login, role)
    VALUES (%s, %s, %s, %s, %s); """
    param = ( rform['prenom'], rform['nom'], rform['mdp'], rform['login'], rform['role'] )
    return bddGen.addData(func_name(), sql, param, msg)
