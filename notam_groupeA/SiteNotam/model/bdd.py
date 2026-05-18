@@ -25,7 +25,7 @@ def verifAuthData(login, mdp):
     return bddGen.selectOneData(func_name(), sql, param)
 
 
-def update_mdpData(newmdp, idUser):
+def update_userMdpData(newmdp, idUser):
     sql = "UPDATE User SET mdp=%s WHERE idUser=%s;"
     param = (newmdp, idUser)
     return bddGen.updateData(func_name(), sql, param, None)
