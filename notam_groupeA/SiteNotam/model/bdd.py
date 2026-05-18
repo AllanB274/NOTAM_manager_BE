@@ -23,3 +23,11 @@ def verifAuthData(login, mdp):
     sql = "SELECT * FROM user where login=%s and mdp=%s"
     param = (login, mdpC)
     return bddGen.selectOneData(func_name(), sql, param)
+
+
+
+def add_membreData(rform, msg=None):
+   sql = """ INSERT INTO user(prenom, nom, mdp, login, role)
+   VALUES (%s, %s, %s, %s, %s); """
+   param = ( rform['prenom'], rform['nom'], rform['mdp'], rform['login'], rform['role'] )
+   return bddGen.addData(func_name(), sql, param, msg)
