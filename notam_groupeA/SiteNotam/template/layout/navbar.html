@@ -15,6 +15,7 @@
 
         <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
           <li class="{{ 'active' if request.endpoint == 'index' else '' }}"><a href="/">Home</a></li>
+          <li class="{{ 'active' if request.endpoint == 'aboutus' else '' }}"><a href="/aboutus">About Us</a></li>
           <li class="{{ 'active' if request.endpoint == 'notam' else '' }}"><a href="/notam">Notams</a></li>
           <!-- <li class="{{ 'active' if request.endpoint == 'vols' else '' }}"><a href="/vols">Vols</a></li> -->
           {% if not session['idUser'] %}
