@@ -36,9 +36,18 @@ def compte():
     return render_template("compte.html")
 
 # sign in
-@app.route("/signin")
-def signin():
-    return render_template("signin.html")
+@app.route("/signup", methods=["POST"])
+def signup():
+    rform = request.form
+    if request.method == "POST":
+        login = rform.get("login")
+        mdp = rform.get("mdp")
+        avatar = rform.get("avatar")
+        role = rform.get("role")
+        mdp_hash = hashlib.sha256(mdp.encode()).hexdigest()
+            bdd.update_userMdpData(mdp_hash, session["idUser"])
+            flash("Account created", "success")
+    return render_template("signup.html")
 
 # about us
 @app.route("/aboutus")
