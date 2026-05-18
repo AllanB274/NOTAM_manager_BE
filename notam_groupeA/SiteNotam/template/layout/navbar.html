@@ -21,7 +21,7 @@
               <!-- <li class="{{ 'active' if request.endpoint == 'vols' else '' }}"><a href="/vols">Vols</a></li> -->
               {% if not session['idUser'] %}
               <li class="{{ 'active' if request.endpoint == 'compte' else '' }}"><a href="/compte">Log In</a></li>
-              <li class="{{ 'active' if request.endpoint == 'signin' else '' }}"><a href="/signin">Sign In</a></li>
+              <li class="{{ 'active' if request.endpoint == 'signup' else '' }}"><a href="/signup">Sign Up</a></li>
               {% endif %}
               {% if session['idUser'] %}
               <li class="{{ 'active' if request.endpoint == 'vols' else '' }}"><a href="/vols">Vols</a></li>
