@@ -39,14 +39,11 @@ def compte():
 @app.route("/signup", methods=["POST"])
 def signup():
     rform = request.form
-    if request.method == "POST":
-        username = rform.get("username")
-        lastname = rform.get("lastname")
-        mdp = rform.get("mdp")
-        role = rform.get("role")
-        mdp_hash = hashlib.sha256(mdp.encode()).hexdigest()
-            bdd.update_userMdpData(mdp_hash, session["idUser"])
-            flash("Account created", "success")
+    msg= {
+        "ok":"Nouveau membre inséré",
+        "echec":"Problème ajout utilisateur"
+    }
+    bdd.add_membreData(rform,msg)
     return render_template("signup.html")
 
 # about us
