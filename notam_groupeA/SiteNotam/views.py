@@ -36,7 +36,7 @@ def compte():
     return render_template("compte.html")
 
 # sign up
-@app.route("/signup", methods=["POST"])
+@app.route("/signup", methods=["POST", "GET"])
 def signup():
     rform = request.form
     if request.method == "POST":
