@@ -1,1 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Modifier le mot de passe</title>
+</head>
+<body>
 
+    <h1>Modification du mot de passe</h1>
+
+    <form action="/modifMdp" method="POST">
+        <label for="ancienMdp">Ancien mot de passe :</label>
+        <input type="password" name="ancienMdp" id="ancienMdp" required>
+
+        <br><br>
+
+        <label for="nouveauMdp">Nouveau mot de passe :</label>
+        <input type="password" name="nouveauMdp" id="nouveauMdp" required>
+
+        <br><br>
+
+        <label for="confirmMdp">Confirmer votre mot de passe :</label>
+        <input type="password" name="confirmMdp" id="confirmMdp" required>
+
+        <br><br>
+
+        <button type="submit">Modifier</button>
+    </form>
+
+</body>
+</html>
