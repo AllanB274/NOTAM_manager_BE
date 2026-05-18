@@ -72,6 +72,13 @@ def addmdp():
 
 @app.route("/modifMdp", methods=["POST"])
 def modifMdp():
+    rform = request.form
+    if request.method == "POST":
+        ancien = rform.get("oldmdp")
+        nouveau = rform.get("newmdp")
+        confirmation = rform.get("confirmMdp")
+        if nouveau == confirm:
+            bdd.update_userMdpData(nouveau, session[idUser])
     return render_template("modifMdp.html")
 
 def verifAuth(login, mdp):
