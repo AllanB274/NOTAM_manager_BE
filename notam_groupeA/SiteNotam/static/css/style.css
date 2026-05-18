@@ -10375,3 +10375,65 @@ nav[aria-label="breadcrumb"] li:before {
       .site-footer .social li a:hover {
         background: #00204a;
         color: #fff; }
+
+        #flash-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flash-message {
+    min-width: 250px;
+    padding: 15px 20px;
+    border-radius: 10px;
+
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+    animation:
+        slideIn 0.4s ease,
+        fadeOut 0.5s ease 4s forwards;
+}
+
+/* Types de messages */
+.flash-message.success {
+    background: #2ecc71;
+}
+
+.flash-message.danger {
+    background: #e74c3c;
+}
+
+.flash-message.warning {
+    background: #f39c12;
+}
+
+.flash-message.info {
+    background: #3498db;
+}
+
+/* Animation d'entrée */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animation de sortie */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
