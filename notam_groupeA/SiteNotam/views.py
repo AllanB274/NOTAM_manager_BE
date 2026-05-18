@@ -35,14 +35,14 @@ def vols():
 def compte():
     return render_template("compte.html")
 
-# sign in
+# sign up
 @app.route("/signup", methods=["POST"])
 def signup():
     rform = request.form
     if request.method == "POST":
-        login = rform.get("login")
+        username = rform.get("username")
+        lastname = rform.get("lastname")
         mdp = rform.get("mdp")
-        avatar = rform.get("avatar")
         role = rform.get("role")
         mdp_hash = hashlib.sha256(mdp.encode()).hexdigest()
             bdd.update_userMdpData(mdp_hash, session["idUser"])
