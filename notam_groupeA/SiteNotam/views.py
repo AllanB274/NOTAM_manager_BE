@@ -79,6 +79,8 @@ def modifMdp():
         confirmation = rform.get("confirmMdp")
         if nouveau == confirm:
             bdd.update_userMdpData(nouveau, session["idUser"])
+            flash("BRAVO", "MDP modified")
+            return redirect("/modifMdp")
     return render_template("modifMdp.html")
 
 def verifAuth(login, mdp):
