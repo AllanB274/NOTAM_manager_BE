@@ -38,5 +38,5 @@ def add_membreData(rform, msg=None):
     mdp = hashlib.sha256(mdp.encode())
     mdpC = mdp.hexdigest() #mot de passe chiffré
     param = ( rform['lastname'], rform['firstname'], rform['username'], mdpC,
-    rform['role'], rform['avatar'] )
+    rform.get('role'), rform['avatar'] )
     return bddGen.addData(func_name(), sql, param, msg)
