@@ -45,7 +45,9 @@ def signup():
             "echec":"Problème ajout utilisateur"
         }
         bdd.add_membreData(rform,msg)
-    return render_template("signup.html")
+        return redirect("/compte")
+    else:
+        return render_template("signup.html")
 
 # about us
 @app.route("/aboutus")
@@ -77,7 +79,8 @@ def addmdp():
     return redirect("/modifMdp")
 
 
-@app.route("/modifMdp", methods=["POST"])
+@app.route("/modifMdp", methods=["POST", "GET"])
+@f.statuts_obligatoires('admin', 'gestion', 'client')
 def modifMdp():
     rform = request.form
     if request.method == "POST":
@@ -85,9 +88,16 @@ def modifMdp():
         nouveau = rform.get("newmdp")
         confirmation = rform.get("confirmMdp")
         if nouveau == confirmation:
-            mdp_hash = hashlib.sha256(nouveau.encode()).hexdigest()
-            bdd.update_userMdpData(mdp_hash, session["idUser"])
-            flash("BRAVO MDP modified", "success")
+            new_mdp_hash = hashlib.sha256(nouveau.encode()).hexdigest()
+            if bdd.verifAuthData(session['login'], ancien):
+                bdd.update_userMdpData(new_mdp_hash, session["idUser"])
+            
+                flash("BRAVO MDP modified", "success")
+            else:
+                flash("Mot de passe erroné!", "danger")
+            return redirect("/modifMdp")
+        else:
+            flash("Les deux mots de passe ne correspondent pas!", "danger")
             return redirect("/modifMdp")
     return render_template("modifMdp.html")
 
@@ -121,5 +131,5 @@ def connect():
 @app.route("/deco")
 def deco():
     session.clear()
-    flash("Vous êtes bien déconnecté.", "primary")
+    flash("Vous êtes bien déconnecté.", "info")
     return redirect("/compte")
