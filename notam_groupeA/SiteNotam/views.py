@@ -39,11 +39,12 @@ def compte():
 @app.route("/signup", methods=["POST"])
 def signup():
     rform = request.form
-    msg= {
-        "ok":"Nouveau membre inséré",
-        "echec":"Problème ajout utilisateur"
-    }
-    bdd.add_membreData(rform,msg)
+    if request.method == "POST":
+        msg= {
+            "ok":"Nouveau membre inséré",
+            "echec":"Problème ajout utilisateur"
+        }
+        bdd.add_membreData(rform,msg)
     return render_template("signup.html")
 
 # about us
@@ -83,7 +84,7 @@ def modifMdp():
         ancien = rform.get("oldmdp")
         nouveau = rform.get("newmdp")
         confirmation = rform.get("confirmMdp")
-        if nouveau == confirm:
+        if nouveau == confirmation:
             mdp_hash = hashlib.sha256(nouveau.encode()).hexdigest()
             bdd.update_userMdpData(mdp_hash, session["idUser"])
             flash("BRAVO MDP modified", "success")
