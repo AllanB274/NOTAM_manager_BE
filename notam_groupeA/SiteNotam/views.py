@@ -78,7 +78,8 @@ def modifMdp():
         nouveau = rform.get("newmdp")
         confirmation = rform.get("confirmMdp")
         if nouveau == confirm:
-            bdd.update_userMdpData(nouveau, session["idUser"])
+            mdp_hash = hashlib.sha256(nouveau.encode()).hexdigest()
+            bdd.update_userMdpData(mdp_hash, session["idUser"])
             flash("BRAVO MDP modified", "success")
             return redirect("/modifMdp")
     return render_template("modifMdp.html")
