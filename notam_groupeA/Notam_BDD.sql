@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS User
     mdp VARCHAR(250),
     login VARCHAR(30),
     role ENUM('admin','client'),
+    avatar VARCHAR(250),
     PRIMARY KEY (idUser)
 ) ENGINE=InnoDB CHARSET=utf8mb4;
 
