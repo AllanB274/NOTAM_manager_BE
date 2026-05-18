@@ -31,17 +31,9 @@ def update_userMdpData(newmdp, idUser):
     return bddGen.updateData(func_name(), sql, param, None)
 
 def add_membreData(rform, msg=None):
-    sql = """ INSERT INTO identification
+    sql = """ INSERT INTO User
     (nom, prenom, login, mdp, role, avatar)
     VALUES (%s, %s, %s, %s, %s, %s, %s); """
-    param = ( rform['lastname'], rform['firstname'], rform['username'], rform['mdp'],
+    param = ( rform['lastname'], rform['firstname'], rform['username'], rform['mdp'].hexdigest(),
     rform['role'], rform['avatar'] )
-    return bddGen.addData(func_name(), sql, param, msg)
-
-
-
-def add_userData(rform, mdp_hash, msg=None):
-    sql = """ INSERT INTO User(prenom, nom, mdp, login, role)
-    VALUES (%s, %s, %s, %s, %s); """
-    param = ( rform['prenom'], rform['nom'], mdp_hash, rform['login'], rform['role'] )
     return bddGen.addData(func_name(), sql, param, msg)
