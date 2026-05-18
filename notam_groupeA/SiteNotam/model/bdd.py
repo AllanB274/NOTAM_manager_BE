@@ -25,15 +25,15 @@ def verifAuthData(login, mdp):
     return bddGen.selectOneData(func_name(), sql, param)
 
 
-def update_mdpData(login, oldmdp, newmdp):
-    sql = "UPDATE User SET mdp=%s WHERE login=%s AND oldmdp=%s;"
-    param = (newmdp, login, oldmdp)
+def update_mdpData(newmdp, idUser):
+    sql = "UPDATE User SET mdp=%s WHERE idUser=%s;"
+    param = (newmdp, idUser)
     return bddGen.updateData(func_name(), sql, param, None)
 
 
 
-def add_userData(rform, msg=None):
+def add_userData(rform, mdp_hash, msg=None):
     sql = """ INSERT INTO User(prenom, nom, mdp, login, role)
     VALUES (%s, %s, %s, %s, %s); """
-    param = ( rform['prenom'], rform['nom'], rform['mdp'], rform['login'], rform['role'] )
+    param = ( rform['prenom'], rform['nom'], mdp_hash, rform['login'], rform['role'] )
     return bddGen.addData(func_name(), sql, param, msg)
