@@ -26,7 +26,7 @@ def notam():
 
 # page sgbd
 @app.route("/vols")
-@f.statuts_obligatoires('admin', 'gestion', 'client')
+@f.statuts_obligatoires('admin', 'client')
 def vols():
     return render_template("vols.html")
 
@@ -54,33 +54,33 @@ def signup():
 def aboutus():
     return render_template("aboutus.html")
 
-@app.route("/addmdp")
-def addmdp():
-    rform = request.form
-    msg={
-        "ok": "Mot de passe valide",
-        "echec" : "Mot de passe invalide"
-    }
+# @app.route("/addmdp")
+# def addmdp():
+#     rform = request.form
+#     msg={
+#         "ok": "Mot de passe valide",
+#         "echec" : "Mot de passe invalide"
+#     }
     
-    #genere mdp aléatoire de 5 caractères
-    caracteres = string.ascii_letters + string.digits
-    mdp = ''.join(secrets.choice(caracteres) for _ in range(5))
-    print("Mot de passe généré:", mdp)
+#     #genere mdp aléatoire de 5 caractères
+#     caracteres = string.ascii_letters + string.digits
+#     mdp = ''.join(secrets.choice(caracteres) for _ in range(5))
+#     print("Mot de passe généré:", mdp)
     
-    #Chiffrement SHA-256
-    mdp_hash = hashlib.sha256(mdp.encode()).hexdigest()
-    print("Mot de passe chiffré:", mdp_hash)
+#     #Chiffrement SHA-256
+#     mdp_hash = hashlib.sha256(mdp.encode()).hexdigest()
+#     print("Mot de passe chiffré:", mdp_hash)
    
     
-    #création user
-    idUser = bdd.add_userData(rform, mdp_hash, msg)
-    print(idUser)
-    flash(mdp)
-    return redirect("/modifMdp")
+#     #création user
+#     idUser = bdd.add_userData(rform, mdp_hash, msg)
+#     print(idUser)
+#     flash(mdp)
+#     return redirect("/modifMdp")
 
 
 @app.route("/modifMdp", methods=["POST", "GET"])
-@f.statuts_obligatoires('admin', 'gestion', 'client')
+@f.statuts_obligatoires('admin', 'client')
 def modifMdp():
     rform = request.form
     if request.method == "POST":

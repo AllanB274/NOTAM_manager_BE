@@ -10376,7 +10376,7 @@ nav[aria-label="breadcrumb"] li:before {
         background: #00204a;
         color: #fff; }
 
-        #flash-container {
+#flash-container {
     position: fixed;
     top: 20px;
     right: 20px;

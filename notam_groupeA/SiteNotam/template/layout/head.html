@@ -1,6 +1,6 @@
 <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="shortcut icon" href="static/img/favicon.png" />
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap5" />
@@ -14,8 +14,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="fonts/icomoon/style.css" />
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
+    <link rel="stylesheet" href="/static/vendor/fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="/static/vendor/fonts/flaticon/font/flaticon.css" />
 
     <link rel="stylesheet" href="/static/css/tiny-slider.css" />
     <link rel="stylesheet" href="/static/css/aos.css" />
@@ -24,24 +24,3 @@
     <title>
       NOTAMEase - {{titre}}
     </title>
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <div id="flash-container">
-      {% for category, message in messages %}
-        <div class="flash-message {{ category }}">
-          {{ message }}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
-<script>
-  setTimeout(() => {
-    const container = document.getElementById("flash-container");
-    if (container) {
-        container.remove();
-    }
-}, 5000);
-</script>
-{% block body %}
-{% endblock %}
