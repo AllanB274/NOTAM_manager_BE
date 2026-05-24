@@ -28,8 +28,9 @@
                         <div class="col text-truncate">Notam {{i}} - [compléter avec requete]</div>
                         <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
                         {% if session['statut']!='client' and session['idUser'] %}
-                        <button class="col-auto px-2"><i class="bi bi-pencil-square"></i></button>
-                        <button class="col-auto px-2"><i class="bi bi-trash"></i></button>
+                        <button class="col-auto px-2" ><div class='modif' data-url = '/updateNotam'
+                                                            data-pk='{{Notam.idDesc}}' ><i class="bi bi-pencil-square"></i></div></button>
+                        <button class="col-auto px-2"><a href="/suppMembre/{{user.idUser}}"><i class="bi bi-trash"></i></a></button>
                         {% endif %}
                         </div>
                         {% endfor %}
@@ -52,6 +53,13 @@
         </div>
     </div>
 </div>
+<script>
+    const $ = jQuery.noConflict();
+    jQuery(function() {
+        $.fn.editable.defaults.mode = 'inline'
+        $(".modif").editable()
+    })
+</script>
 {% include("layout/footer.html") %}
 </body>
 </html>
