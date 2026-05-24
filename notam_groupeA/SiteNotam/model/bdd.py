@@ -42,3 +42,13 @@ def add_membreData(rform, msg=None):
     param = ( rform['lastname'], rform['firstname'], rform['username'], mdpC,
     rform.get('role'), avatar )
     return bddGen.addData(func_name(), sql, param, msg)
+
+def del_membreData(idUser, msg=None):
+    sql = "DELETE FROM User WHERE idUser=%s;"
+    param = (idUser,)
+    return bddGen.deleteData(func_name(),sql, param, msg)
+
+def update_notam(idDesc, newdesc):
+    sql = "UPDATE Notam SET description=%s WHERE idDesc=%s;"
+    param = (newdesc, idDesc)
+    return bddGen.updateData(func_name(), sql, param, None)
