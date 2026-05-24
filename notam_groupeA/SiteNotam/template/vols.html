@@ -67,6 +67,10 @@
                     Aeroport 2
                 </h1>
                 <div></div>
+            {% if session['statut']!='client' %}
+            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterAirport">Add an airport</a></h5>
+            {% endif %}
+            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tout les notams</a></h5>
             </div>
             <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tout les notams</a></h5>
         </div>
