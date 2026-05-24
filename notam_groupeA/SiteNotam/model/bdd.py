@@ -48,6 +48,13 @@ def del_membreData(idUser, msg=None):
     param = (idUser,)
     return bddGen.deleteData(func_name(),sql, param, msg)
 
+def add_airportData(rform, msg=None):
+    sql = """ INSERT INTO aerodrome
+    (codeAerodrome, nomAerodrome, region, departement, ville, pays)
+    VALUES (%s, %s, %s, %s, %s, %s); """
+    param = ( rform['codeAerodrome'], rform['nomAerodrome'], rform['region'], rform['departement'], rform['ville'], rform['pays'] )
+    return bddGen.addData(func_name(), sql, param, msg)
+
 def update_notam(idDesc, newdesc):
     sql = "UPDATE Notam SET description=%s WHERE idDesc=%s;"
     param = (newdesc, idDesc)
