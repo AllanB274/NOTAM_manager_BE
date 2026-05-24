@@ -133,3 +133,19 @@ def deco():
     session.clear()
     flash("Vous êtes bien déconnecté.", "info")
     return redirect("/compte")
+
+@app.route("/suppMembre/<idUser>")
+def suprMembre(idUser):
+    msg= {
+        "ok":"L'utilisateur a bien été supprimé",
+        "echec":"Problème suppression utilisateur"
+    }
+    bdd.del_membreData(idUser,msg)
+    return redirect("/notam")
+
+@app.route("/updateNotam", methods=['POST'])
+def updateNom():
+    idDesc = request.form['pk']
+    newdesc = request.form['value']
+    bdd.update_notam(idDesc, newdesc)
+    return "1"
