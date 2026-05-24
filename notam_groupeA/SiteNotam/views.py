@@ -49,6 +49,23 @@ def signup():
     else:
         return render_template("signup.html")
 
+
+# ajouterAirport
+
+@app.route("/ajouterAirport", methods=["POST", "GET"])
+def ajouterAirport():
+    rform = request.form
+    if request.method == "POST":
+        msg= {
+            "ok":"Nouvel Aeroport inséré",
+            "echec":"Problème ajout Aeroport"
+        }
+        bdd.add_airportData(rform,msg)
+        return redirect("/vols")
+    else:
+        return render_template("ajouterAirport.html")
+
+
 # about us
 @app.route("/aboutus")
 def aboutus():
