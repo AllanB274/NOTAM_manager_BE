@@ -46,8 +46,13 @@ def signup():
             "ok":"Nouveau membre inséré",
             "echec":"Problème ajout utilisateur"
         }
-        bdd.add_membreData(rform,msg)
-        return redirect("/compte")
+        try :
+            bdd.add_membreData(rform,msg)
+            return redirect("/compte")
+        except TypeError as err:
+        #Refus
+            flash("Account refused", "danger")
+            return redirect("/signup")
     else:
         return render_template("signup.html")
 
