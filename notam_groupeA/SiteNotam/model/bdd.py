@@ -34,14 +34,20 @@ def add_membreData(rform, msg=None):
     sql = """ INSERT INTO User
     (nom, prenom, login, mdp, role, avatar)
     VALUES (%s, %s, %s, %s, %s, %s); """
-    mdp=rform['mdp']
+    mdp = rform['mdp']
     mdp = hashlib.sha256(mdp.encode())
     mdpC = mdp.hexdigest() #mot de passe chiffré
-    # avatar = rform['avatar']
+    #avatar = rform['avatar']
     avatar = None
-    param = ( rform['lastname'], rform['firstname'], rform['username'], mdpC,
-    rform.get('role'), avatar )
+    # Vérification admin
+    if rform['role'] == 'admin':
+        if rform['mdpAdmin'] != 'secret':
+            raise TypeError("admin key incorrect")
+
+    param = (rform['lastname'], rform['firstname'], rform['username'], mdpC, rform.get('role'), avatar)
     return bddGen.addData(func_name(), sql, param, msg)
+
+
 
 def del_membreData(idUser, msg=None):
     sql = "DELETE FROM User WHERE idUser=%s;"
