@@ -28,16 +28,26 @@
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <input
-                type="text"
-                class="form-control px-4"
+              <select
+                name="departure"
+                id="departure"
+                class="form-select px-4 mx-2"
                 placeholder="Departure"
-              />
-              <input
-                type="text"
-                class="form-control px-4"
+              >
+                {% for ap in airports %}
+                <option value="{{ap['idaerodrome']}}">{{ap['nomAerodrome']}}</option>
+                {% endfor %}
+              </select>
+              <select
+                name="arrival"
+                id="arrival"
+                class="form-select px-4 mx-2"
                 placeholder="Arrival"
-              />
+              >
+                {% for ap in airports %}
+                <option value="{{ap['idaerodrome']}}">{{ap['nomAerodrome']}}</option>
+                {% endfor %}
+              </select>
               <button type="submit" class="btn btn-primary">Check</button>
             </form>
           </div>

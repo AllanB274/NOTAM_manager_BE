@@ -17,7 +17,8 @@ app.config.from_object('SiteNotam.config')
 # page accueil
 @app.route("/")
 def index():
-    return render_template("index.html")
+    airports = bdd.get_airports(None)
+    return render_template("index.html", airports=airports)
 
 # page notams
 @app.route("/notam")
@@ -32,6 +33,7 @@ def vols():
 
 # log in
 @app.route("/compte")
+@f.statuts_interdits('admin', 'client')
 def compte():
     return render_template("compte.html")
 

@@ -23,3 +23,19 @@ def statuts_obligatoires(*statuts_autorises):
             return f(*args, **kwargs) # Exécute la route si tout est valide
         return wrapper
     return decorateur
+
+def statuts_interdits(*statuts_interdits):
+    def decorateur(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            if 'statut' in session and session['statut'] in statuts_interdits:
+                routes = {
+                    "admin": "/vols",
+                    "client": "/vols"
+                }
+                flash("Vous n'avez pas les droits pour accéder à cette page.", "danger")
+                route_suivante = routes.get(session['statut'], "/")
+                return redirect(route_suivante)
+            return f(*args, **kwargs) # Exécute la route si tout est valide
+        return wrapper
+    return decorateur

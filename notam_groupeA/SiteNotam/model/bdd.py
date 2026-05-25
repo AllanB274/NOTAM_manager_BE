@@ -59,3 +59,8 @@ def update_notam(idDesc, newdesc):
     sql = "UPDATE Notam SET description=%s WHERE idDesc=%s;"
     param = (newdesc, idDesc)
     return bddGen.updateData(func_name(), sql, param, None)
+
+def get_airports(exclusion):
+    # Renvoie la liste de tout les aéroports sauf les id compris dans exclusion
+    sql = f"SELECT idAerodrome, nomAerodrome FROM aerodrome"
+    return bddGen.selectData(func_name(), sql, None, None)
