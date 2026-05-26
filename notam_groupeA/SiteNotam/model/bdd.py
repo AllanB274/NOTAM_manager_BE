@@ -20,18 +20,18 @@ def get_membresData():
 def verifAuthData(login, mdp):
     mdp = hashlib.sha256(mdp.encode())
     mdpC = mdp.hexdigest() #mot de passe chiffré
-    sql = "SELECT * FROM User where login=%s and mdp=%s"
+    sql = "SELECT * FROM user where login=%s and mdp=%s"
     param = (login, mdpC)
     return bddGen.selectOneData(func_name(), sql, param)
 
 
 def update_userMdpData(newmdp, idUser):
-    sql = "UPDATE User SET mdp=%s WHERE idUser=%s;"
+    sql = "UPDATE user SET mdp=%s WHERE idUser=%s;"
     param = (newmdp, idUser)
     return bddGen.updateData(func_name(), sql, param, None)
 
 def add_membreData(rform, msg=None):
-    sql = """ INSERT INTO User
+    sql = """ INSERT INTO user
     (nom, prenom, login, mdp, role, avatar)
     VALUES (%s, %s, %s, %s, %s, %s); """
     mdp = rform['mdp']
@@ -50,7 +50,7 @@ def add_membreData(rform, msg=None):
 
 
 def del_membreData(idUser, msg=None):
-    sql = "DELETE FROM User WHERE idUser=%s;"
+    sql = "DELETE FROM user WHERE idUser=%s;"
     param = (idUser,)
     return bddGen.deleteData(func_name(),sql, param, msg)
 
@@ -62,11 +62,12 @@ def add_airportData(rform, msg=None):
     return bddGen.addData(func_name(), sql, param, msg)
 
 def update_notam(idDesc, newdesc):
-    sql = "UPDATE Notam SET description=%s WHERE idDesc=%s;"
+    sql = "UPDATE notam SET description=%s WHERE idDesc=%s;"
     param = (newdesc, idDesc)
     return bddGen.updateData(func_name(), sql, param, None)
 
 def get_airports(exclusion):
     # Renvoie la liste de tout les aéroports sauf les id compris dans exclusion
     sql = f"SELECT idAerodrome, nomAerodrome FROM aerodrome"
-    return bddGen.selectData(func_name(), sql, None, None)
+    r = bddGen.selectData(func_name(), sql, None, None)
+    return r if r!=None else []
