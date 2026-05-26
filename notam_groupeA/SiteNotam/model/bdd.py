@@ -37,8 +37,7 @@ def add_membreData(rform, msg=None):
     mdp = rform['mdp']
     mdp = hashlib.sha256(mdp.encode())
     mdpC = mdp.hexdigest() #mot de passe chiffré
-    #avatar = rform['avatar']
-    avatar = None
+    avatar = rform['avatar']
     # Vérification admin
     if rform['role'] == 'admin':
         if rform['mdpAdmin'] != 'secret':

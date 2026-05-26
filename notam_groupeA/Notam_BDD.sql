@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS Vol
     date_arrivee DATETIME,
     PRIMARY KEY (idVol),
     FOREIGN KEY (idUser) REFERENCES User(idUser),
-    FOREIGN KEY (idDepart) REFERENCES Aerodrome(idAerodrome),
-    FOREIGN KEY (idArrivee) REFERENCES Aerodrome(idAerodrome)
+    FOREIGN KEY (idDepart) REFERENCES aerodrome(idAerodrome),
+    FOREIGN KEY (idArrivee) REFERENCES aerodrome(idAerodrome)
 ) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS Objets
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Notam
     idUser INT,
     idObjet INT,
     PRIMARY KEY (idNotam),
-    FOREIGN KEY (idAerodrome) REFERENCES Aerodrome(idAerodrome) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (idAerodrome) REFERENCES aerodrome(idAerodrome) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (idUser) REFERENCES User(idUser),
     FOREIGN KEY (idObjet) REFERENCES Objets(idObjet)
 ) ENGINE=InnoDB CHARSET=utf8mb4;
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS degagement_vol
     idDegagement INT,
     PRIMARY KEY (idDV),
     FOREIGN KEY (idVol) REFERENCES Vol(idVol),
-    FOREIGN KEY (idDegagement) REFERENCES Aerodrome(idAerodrome)
+    FOREIGN KEY (idDegagement) REFERENCES aerodrome(idAerodrome)
 ) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS Vol_User
@@ -108,7 +108,7 @@ VALUES
 ('Luc','Leugotte','f8638b979b2f4f793ddb6dbd197e0ee25a7a6ea32b0ae22f5e3c5d119d839e75', 'Lu', 'admin'),
 ('Allan','Gromolet','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Al', 'client');
 
-INSERT INTO Aerodrome (codeAerodrome,nomAerodrome,region,departement,ville,pays)
+INSERT INTO aerodrome (codeAerodrome,nomAerodrome,region,departement,ville,pays)
 VALUES
 ('LFBO','Blagnac','Occitanie','Haute Garonne','Toulouse','France'),
 ('LFLC','Aeroport de clermont ferrand','Auvergne','Puy de domes','Clermont Ferrand','France'),
