@@ -23,14 +23,14 @@
             </div> -->
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
                     <div style="overflow-y: scroll; height: 60vh;">
-                        {%for i in range(100)%}
+                        {%for i in notams%}
                         <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
-                        <div class="col text-truncate">Notam {{i}} - [compléter avec requete]</div>
+                        <div class="col text-truncate">Notam - [compléter avec requete]</div>
                         <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
                         {% if session['statut']!='client' and session['idUser'] %}
                         <button class="col-auto px-2" ><div class='modif' data-url = '/updateNotam'
-                                                            data-pk='{{Notam.idDesc}}' ><i class="bi bi-pencil-square"></i></div></button>
-                        <button class="col-auto px-2"><a href="/suppNotam/{{user.idNotam}}"><i class="bi bi-trash"></i></a></button>
+                                                            data-pk='{{i["idNotam"]}}' ><i class="bi bi-pencil-square"></i></div></button>
+                        <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i class="bi bi-trash"></i></a></button>
                         {% endif %}
                         </div>
                         {% endfor %}

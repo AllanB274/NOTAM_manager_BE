@@ -17,13 +17,14 @@ app.config.from_object('SiteNotam.config')
 # page accueil
 @app.route("/")
 def index():
-    airports = bdd.get_airports(None)
+    airports = bdd.get_airports()
     return render_template("index.html", airports=airports)
 
 # page notams
 @app.route("/notam")
 def notam():
-    return render_template("notam.html")
+    lnotam = bdd.get_notams()
+    return render_template("notam.html", notams=lnotam)
 
 # page sgbd
 @app.route("/vols")
@@ -39,6 +40,7 @@ def compte():
 
 # sign up
 @app.route("/signup", methods=["POST", "GET"])
+@f.statuts_interdits('admin', 'client')
 def signup():
     rform = request.form
     if request.method == "POST":
@@ -158,18 +160,18 @@ def deco():
     flash("Vous êtes bien déconnecté.", "info")
     return redirect("/compte")
 
-@app.route("/suppNotam/<idUser>")
+@app.route("/suppNotam/<idNotam>")
 def suppNotam(idNotam):
     msg= {
-        "ok":"L'utilisateur a bien été supprimé",
-        "echec":"Problème suppression utilisateur"
+        "ok":"Le notam a bien été supprimé",
+        "echec":"Problème suppression notam"
     }
     bdd.del_notamData(idNotam,msg)
     return redirect("/notam")
 
 @app.route("/updateNotam", methods=['POST'])
-def updateNom():
-    idDesc = request.form['pk']
+def updateNotam():
+    idNotam = request.form['pk']
     newdesc = request.form['value']
-    bdd.update_notam(idDesc, newdesc)
+    bdd.update_notam(idNotam, newdesc)
     return "1"

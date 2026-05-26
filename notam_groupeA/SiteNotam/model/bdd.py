@@ -41,7 +41,7 @@ def add_membreData(rform, msg=None):
 
 
 def del_notamData(idNotam, msg=None):
-    sql = "DELETE FROM user WHERE idUser=%s;"
+    sql = "DELETE FROM Notam WHERE idNotam=%s;"
     param = (idNotam,)
     return bddGen.deleteData(func_name(),sql, param, msg)
 
@@ -52,13 +52,19 @@ def add_airportData(rform, msg=None):
     param = ( rform['codeAerodrome'], rform['nomAerodrome'], rform['region'], rform['departement'], rform['ville'], rform['pays'] )
     return bddGen.addData(func_name(), sql, param, msg)
 
-def update_notam(idDesc, newdesc):
-    sql = "UPDATE notam SET description=%s WHERE idDesc=%s;"
-    param = (newdesc, idDesc)
+def update_notam(idNotam, newdesc):
+    sql = "UPDATE Notam SET description=%s WHERE idNotam=%s;"
+    param = (newdesc, idNotam)
     return bddGen.updateData(func_name(), sql, param, None)
 
-def get_airports(exclusion):
+def get_airports():
     # Renvoie la liste de tout les aéroports sauf les id compris dans exclusion
     sql = f"SELECT idAerodrome, nomAerodrome FROM aerodrome"
+    r = bddGen.selectData(func_name(), sql, None, None)
+    return r if r!=None else []
+
+def get_notams():
+    # Renvoie la liste de tout les notams sauf les id compris dans exclusion
+    sql = f"SELECT * FROM Notam"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
