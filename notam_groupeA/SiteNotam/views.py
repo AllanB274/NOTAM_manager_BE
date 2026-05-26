@@ -158,13 +158,13 @@ def deco():
     flash("Vous êtes bien déconnecté.", "info")
     return redirect("/compte")
 
-@app.route("/suppMembre/<idUser>")
-def suprMembre(idUser):
+@app.route("/suppNotam/<idUser>")
+def suppNotam(idNotam):
     msg= {
         "ok":"L'utilisateur a bien été supprimé",
         "echec":"Problème suppression utilisateur"
     }
-    bdd.del_membreData(idUser,msg)
+    bdd.del_notamData(idNotam,msg)
     return redirect("/notam")
 
 @app.route("/updateNotam", methods=['POST'])
