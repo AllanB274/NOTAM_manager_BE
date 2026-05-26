@@ -40,9 +40,9 @@ def add_membreData(rform, msg=None):
 
 
 
-def del_membreData(idUser, msg=None):
-    sql = "DELETE FROM User WHERE idUser=%s;"
-    param = (idUser,)
+def del_notamData(idNotam, msg=None):
+    sql = "DELETE FROM user WHERE idUser=%s;"
+    param = (idNotam,)
     return bddGen.deleteData(func_name(),sql, param, msg)
 
 def add_airportData(rform, msg=None):
