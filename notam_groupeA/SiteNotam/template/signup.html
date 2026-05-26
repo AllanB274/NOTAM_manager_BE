@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% set titre="Sign in" %}
+    {% set titre="Sign up" %}
     {% include("layout/head.html") %}
 </head>
 <body>
@@ -62,7 +62,7 @@
                     <h5>Choisissez un avatar</h5>
                     {% for i in range(1,13) %}
                      <input type="radio" name="avatar" value="{{i}}.png">
-                     <img src="/static/img/avatar/{{i}}.png" />
+                     <img src="/static/img/avatar/{{i}}.png" class="user-avatar"/>
                     {% endfor %}
                     
                     <div class="form-check">
