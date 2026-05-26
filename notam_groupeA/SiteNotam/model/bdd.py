@@ -26,14 +26,28 @@ def add_membreData(rform, msg=None):
     sql = """ INSERT INTO User
     (nom, prenom, login, mdp, role, avatar)
     VALUES (%s, %s, %s, %s, %s, %s); """
+    
+    #verification admin
+    if rform['role'] == 'admin':
+        if rform['mdpAdmin'] != 'secret':
+            raise TypeError("admin key incorrect")
+        
+    #remplir les champs vide
+    if rform['username'] == '' or rform['mdp'] == '' or rform['avatar'] == '':
+        raise TypeError("remplir les champs exigez")
+
+    #verifier que l'user n'existe pas deja
+
+    sql2 = "SELECT * FROM User where login=%s"
+    param2 = (rform['username'])
+    if bddGen.selectOneData(func_name(), sql2, param2):
+        raise TypeError("utilisateur deja existant")
+    
     mdp = rform['mdp']
     mdp = hashlib.sha256(mdp.encode())
     mdpC = mdp.hexdigest() #mot de passe chiffré
     avatar = rform['avatar']
-    # Vérification admin
-    if rform['role'] == 'admin':
-        if rform['mdpAdmin'] != 'secret':
-            raise TypeError("admin key incorrect")
+
 
     param = (rform['lastname'], rform['firstname'], rform['username'], mdpC, rform.get('role'), avatar)
     return bddGen.addData(func_name(), sql, param, msg)

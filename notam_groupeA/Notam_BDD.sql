@@ -114,14 +114,17 @@ VALUES
 ('LFLC','Aeroport de clermont ferrand','Auvergne','Puy de domes','Clermont Ferrand','France'),
 ('LFBO','Merignac','Nouvelle Aquitaine','Gironde', 'Bordeau','France');
 
-INSERT INTO Notam(idNotam, typeNotam, date_debut, date_fin, creneau, description, limite_inferieur, limite_superieur, typeVol, idAerodrome, idUser, idObjet)
-VALUES
-('156156', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', 'OULALALALAAAAA LES TRAVAUUUUUX', "FL005", 'FL200', 'IV', 1, 1, 1);
 
 INSERT INTO Objets(nomObjet)
 VALUES
 ('cochon volant'),
 ('travaux');
+
+INSERT INTO Notam(idNotam, typeNotam, date_debut, date_fin, creneau, description, limite_inferieur, limite_superieur, typeVol, idAerodrome, idUser, idObjet)
+VALUES
+('156156', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', 'OULALALALAAAAA LES TRAVAUUUUUX', "FL005", 'FL200', 'IV', 1, 1, 1);
+
+
 
 
 
