@@ -143,7 +143,7 @@ def connect():
         # session["mail"] = user["mail"]
         session['login'] = user['login']
         session["statut"] = user["role"]
-        # session["avatar"] = user["avatar"]
+        session["avatar"] = user["avatar"]
         flash("Authentification réussie", "success")
         return redirect("/vols")
     except TypeError as err:
