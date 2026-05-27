@@ -86,15 +86,16 @@ def update_notam(idNotam, newdesc):
 
 def get_airports():
     # Renvoie la liste de tout les aéroports
-    sql = f"SELECT idAerodrome, nomAerodrome FROM aerodrome"
+    sql = f"SELECT * FROM aerodrome"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
 def get_notams():
     # Renvoie la liste de tout les notams
-    sql = f"SELECT * FROM Notam"
-    r = bddGen.selectData(func_name(), sql, None, None)
-    return r if r!=None else []
+    sql = f"SELECT Notam.*, codeAerodrome, nomAerodrome FROM Notam JOIN aerodrome ON Notam.idAerodrome=aerodrome.idAerodrome"
+    r1 = bddGen.selectData(func_name(), sql, None, None)
+    
+    return r1 if r1!=None else []
 
 def get_vols():
     # Renvoie la liste de tout les vols

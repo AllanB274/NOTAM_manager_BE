@@ -24,7 +24,8 @@ def index():
 @app.route("/notam")
 def notam():
     lnotam = bdd.get_notams()
-    return render_template("notam.html", notams=lnotam)
+    lairports = bdd.get_airports()
+    return render_template("notam.html", notams=lnotam, airports=lairports)
 
 # page sgbd
 @app.route("/vols")
