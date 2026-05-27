@@ -1,0 +1,76 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% set titre="Sign in" %}
+    {% include("layout/head.html") %}
+</head><!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% set titre="Sign in" %}
+    {% include("layout/head.html") %}
+</head>
+<body>
+{% include("layout/navbar.html") %}
+
+<div class="hero">
+    {% include("layout/bgimg.html") %}
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-9 text-center">
+                <h1 class="heading" data-aos="fade-up">
+                    Airport 1
+                </h1>
+                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
+                    <div style="overflow-y: scroll; height: 60vh;">
+                        {%for i in notams%}
+                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
+                        <div class="col text-truncate">Notam - [compléter avec requete]</div>
+                        <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
+                        {% if session['statut']!='client' and session['idUser'] %}
+                        <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i class="bi bi-trash"></i></a></button>
+                        {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <h1 class="heading" data-aos="fade-up">
+                    Airport 2
+                </h1>
+                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
+                    <div style="overflow-y: scroll; height: 60vh;">
+                        {%for i in notams%}
+                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
+                        <div class="col text-truncate">Notam - [compléter avec requete]</div>
+                        <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
+                        {% if session['statut']!='client' and session['idUser'] %}
+                        <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i class="bi bi-trash"></i></a></button>
+                        {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% if session['statut']!='client' %}
+            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterAirport">Add an airport</a></h5>
+            {% endif %}
+            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tout les notams</a></h5>
+            </div>
+            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tout les notams</a></h5>
+        </div>
+    </div>
+</div>
+{% include("layout/footer.html") %}
+</body>
+</html>

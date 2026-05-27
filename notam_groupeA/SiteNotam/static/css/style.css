@@ -9665,7 +9665,7 @@ textarea {
 .hero {
   position: relative;
   background-size: cover;
-  background-position: cnter center;
+  background-position: fixed;
   background-repeat: no-repeat;
   background-color: #00204a; }
   .hero.overlay {
@@ -9725,7 +9725,7 @@ textarea {
 
 .hero-slide {
   top: 0;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0; }
   .hero-slide .img {

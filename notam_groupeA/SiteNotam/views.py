@@ -185,3 +185,7 @@ def suppVol(idVol):
     }
     bdd.del_volData(idVol,msg)
     return redirect("/vols")
+
+@app.route("/versvol")
+def versvol():
+    return render_template("volsanss.html")
