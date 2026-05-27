@@ -137,7 +137,6 @@ def connect():
     login = request.form['login']
     mdp = request.form['mdp']
     user = bdd.verifAuthData(login, mdp)
-    print(user)
     try:
         #Réussite
         session["idUser"] = user["idUser"]
@@ -186,6 +185,20 @@ def suppVol(idVol):
     bdd.del_volData(idVol,msg)
     return redirect("/vols")
 
-@app.route("/versvol")
+@app.route("/versvol", methods=["POST","GET"])
 def versvol():
-    return render_template("volsanss.html")
+    departure = request.form.get('departure2')
+    arrival = request.form.get('arrival2')
+    print(arrival, len(arrival))
+    print(departure, len(departure))
+    vol = bdd.verifVolExist(departure, arrival)
+    try:
+        #Réussite
+        session["arrival"] = vol["arrival"]
+        session["departure"] = vol["departure"]
+        flash("Bon voyage", "success")
+        return redirect("/volsanss")
+    except TypeError as err:
+        #Refus
+        flash("Réfléchis un peu", "danger")
+        return redirect("/")

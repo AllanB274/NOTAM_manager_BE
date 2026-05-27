@@ -27,25 +27,28 @@
               class="narrow-w form-search d-flex align-items-stretch mb-3"
               data-aos="fade-up"
               data-aos-delay="200"
+              method="post"
             >
               <select
-                name="departure"
+                type="text"
                 id="departure"
+                name="departure2"
                 class="form-select px-4 mx-2"
                 placeholder="Departure"
               >
                 {% for ap in airports %}
-                <option value="{{ap['idaerodrome']}}">{{ap['nomAerodrome']}}</option>
+                <option value="{{ap['idaerodrome']}}" id="departure">{{ap['nomAerodrome']}}</option>
                 {% endfor %}
               </select>
               <select
-                name="arrival"
+                type="text"
                 id="arrival"
+                name="arrival2"
                 class="form-select px-4 mx-2"
                 placeholder="Arrival"
               >
                 {% for ap in airports %}
-                <option value="{{ap['idaerodrome']}}">{{ap['nomAerodrome']}}</option>
+                <option value="{{ap['idaerodrome']}}" id="arrival">{{ap['nomAerodrome']}}</option>
                 {% endfor %}
               </select>
               <button type="submit" class="btn btn-primary">Check</button>

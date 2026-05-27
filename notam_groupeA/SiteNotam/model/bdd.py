@@ -16,6 +16,14 @@ def verifAuthData(login, mdp):
     param = (login, mdpC)
     return bddGen.selectOneData(func_name(), sql, param)
 
+def verifVolExist(departure, arrival):
+    sql1 = "SELECT idAerodrome FROM aerodrome where nomAerodrome=%s"
+    idDepart = bddGen.selectOneData(func_name(), sql1, departure)
+    idArrivee = bddGen.selectOneData(func_name(), sql1, arrival)
+    sql = "SELECT * FROM Vol where idDepart=%s and idArrivee=%s"
+    param = (idDepart, idArrivee)
+    return bddGen.selectOneData(func_name(), sql, param)
+
 
 def update_userMdpData(newmdp, idUser):
     sql = "UPDATE user SET mdp=%s WHERE idUser=%s;"
