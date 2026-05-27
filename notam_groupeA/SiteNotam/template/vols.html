@@ -21,7 +21,7 @@
             <!-- <div id="filtre">
 
             </div> -->
-                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
+                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6" data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 60vh;">
                         <!-- On affiche que les vols de l'utilisateur OU tout si admin -->
                         {%for i in vols%}
@@ -40,31 +40,6 @@
     </div>
 </div>
 
-<!-- Résultat du clic pour voir le vol -> potentiel condition Jinja pour cacher cette partie -->
-
-<div class="hero">
-    {% include("layout/bgimg.html") %}
-
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-9 text-center">
-                <h1 class="heading" data-aos="fade-up">
-                    Aeroport 1
-                </h1>
-                <div></div>
-                <h1 class="heading" data-aos="fade-up">
-                    Aeroport 2
-                </h1>
-                <div></div>
-            {% if session['statut']!='client' %}
-            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterAirport">Add an airport</a></h5>
-            {% endif %}
-            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tout les notams</a></h5>
-            </div>
-            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tout les notams</a></h5>
-        </div>
-    </div>
-</div>
 {% include("layout/footer.html") %}
 </body>
 </html>
