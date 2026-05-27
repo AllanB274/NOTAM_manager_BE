@@ -46,10 +46,10 @@ def add_membreData(rform, msg=None):
 
     #verifier que l'user n'existe pas deja
 
-    sql2 = "SELECT * FROM User where login=%s"
-    param2 = (rform['username'])
-    if bddGen.selectOneData(func_name(), sql2, param2):
-        raise TypeError("utilisateur deja existant")
+    # sql2 = "SELECT * FROM User where login=%s"
+    # param2 = (rform['username'])
+    # if bddGen.selectOneData(func_name(), sql2, param2):
+    #     raise TypeError("utilisateur deja existant")
     
     mdp = rform['mdp']
     mdp = hashlib.sha256(mdp.encode())

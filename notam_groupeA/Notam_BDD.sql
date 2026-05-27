@@ -124,12 +124,6 @@ VALUES
 ('156156', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', 'OULALALALAAAAA LES TRAVAUUUUUX', "FL005", 'FL200', 'IV', 1, 1, 1);
 
 
-
-
-INSERT INTO Notam(idNotam, typeNotam, date_debut, date_fin, creneau, description, limite_inferieur, limite_superieur, typeVol, idAerodrome, idUser, idObjet)
-VALUES
-('156156', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', 'OULALALALAAAAA LES TRAVAUUUUUX', "FL005", 'FL200', 'IV', 1, 1, 1);
-
 INSERT INTO Vol(typeVol, nomVol, idUser, idDepart, idArrivee, date_depart, date_arrivee)
 VALUES
 ('I', 'la mère de Ryan', 1, 2, 3, "2026-01-01 00:00:00", "2026-01-01 00:00:01")
