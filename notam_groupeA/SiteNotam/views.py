@@ -30,7 +30,8 @@ def notam():
 @app.route("/vols")
 @f.statuts_obligatoires('admin', 'client')
 def vols():
-    return render_template("vols.html")
+    lvols = bdd.get_vols()
+    return render_template("vols.html", vols=lvols)
 
 # log in
 @app.route("/compte")
@@ -175,3 +176,12 @@ def updateNotam():
     newdesc = request.form['value']
     bdd.update_notam(idNotam, newdesc)
     return "1"
+
+@app.route("/suppVol/<idVol>")
+def suppVol(idVol):
+    msg= {
+        "ok":"Le vol a bien été supprimé",
+        "echec":"Problème suppression vol"
+    }
+    bdd.del_volData(idVol,msg)
+    return redirect("/vols")

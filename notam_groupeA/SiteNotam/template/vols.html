@@ -35,13 +35,13 @@
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
                     <div style="overflow-y: scroll; height: 60vh;">
                         <!-- On affiche que les vols de l'utilisateur OU tout si admin -->
-                        {%for i in range(100)%}
+                        {%for i in vols%}
                         <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
-                        <div class="col text-truncate">Vol {{i}} - [compléter avec requete]</div>
+                        <div class="col text-truncate">Vol - [compléter avec requete]</div>
                         <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
                         {% if session['statut']!='client' %}
                         <button class="col-auto px-2"><i class="bi bi-pencil-square"></i></button>
-                        <button class="col-auto px-2"><i class="bi bi-trash"></i></button>
+                        <button class="col-auto px-2"><a href="/suppVol/{{i['idVol']}}"><i class="bi bi-trash"></i></a></button>
                         {% endif %}
                         </div>
                         {% endfor %}

@@ -45,6 +45,11 @@ def del_notamData(idNotam, msg=None):
     param = (idNotam,)
     return bddGen.deleteData(func_name(),sql, param, msg)
 
+def del_volData(idVol, msg=None):
+    sql = "DELETE FROM Vol WHERE idVol=%s;"
+    param = (idVol,)
+    return bddGen.deleteData(func_name(),sql, param, msg)
+
 def add_airportData(rform, msg=None):
     sql = """ INSERT INTO aerodrome
     (codeAerodrome, nomAerodrome, region, departement, ville, pays)
@@ -58,13 +63,19 @@ def update_notam(idNotam, newdesc):
     return bddGen.updateData(func_name(), sql, param, None)
 
 def get_airports():
-    # Renvoie la liste de tout les aéroports sauf les id compris dans exclusion
+    # Renvoie la liste de tout les aéroports
     sql = f"SELECT idAerodrome, nomAerodrome FROM aerodrome"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
 def get_notams():
-    # Renvoie la liste de tout les notams sauf les id compris dans exclusion
+    # Renvoie la liste de tout les notams
     sql = f"SELECT * FROM Notam"
+    r = bddGen.selectData(func_name(), sql, None, None)
+    return r if r!=None else []
+
+def get_vols():
+    # Renvoie la liste de tout les vols
+    sql = f"SELECT * FROM Vol"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []

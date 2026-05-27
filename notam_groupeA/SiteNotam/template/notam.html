@@ -28,8 +28,8 @@
                         <div class="col text-truncate">Notam - [compléter avec requete]</div>
                         <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
                         {% if session['statut']!='client' and session['idUser'] %}
-                        <button class="col-auto px-2" ><div class='modif' data-url = '/updateNotam'
-                                                            data-pk='{{i["idNotam"]}}' ><i class="bi bi-pencil-square"></i></div></button>
+                        <!--<button class="col-auto px-2" ><div class='modif' data-url = '/updateNotam'
+                                                            data-pk='{{i["idNotam"]}}' ><i class="bi bi-pencil-square"></i></div></button>-->
                         <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i class="bi bi-trash"></i></a></button>
                         {% endif %}
                         </div>
