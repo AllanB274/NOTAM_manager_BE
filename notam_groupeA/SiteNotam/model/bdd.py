@@ -17,11 +17,8 @@ def verifAuthData(login, mdp):
     return bddGen.selectOneData(func_name(), sql, param)
 
 def verifVolExist(departure, arrival):
-    sql1 = "SELECT idAerodrome FROM aerodrome where nomAerodrome=%s"
-    idDepart = bddGen.selectOneData(func_name(), sql1, departure)
-    idArrivee = bddGen.selectOneData(func_name(), sql1, arrival)
     sql = "SELECT * FROM Vol where idDepart=%s and idArrivee=%s"
-    param = (idDepart, idArrivee)
+    param = (departure, arrival)
     return bddGen.selectOneData(func_name(), sql, param)
 
 
@@ -100,4 +97,12 @@ def get_vols():
     # Renvoie la liste de tout les vols
     sql = f"SELECT * FROM Vol"
     r = bddGen.selectData(func_name(), sql, None, None)
+    return r if r!=None else []
+
+def get_notamsVol(idAero):
+    # Renvoie la liste de tout les vols
+    sql = "SELECT * FROM Notam WHERE idAerodrome=%s"
+    param = (idAero,)
+    r = bddGen.selectOneData(func_name(), sql, param)
+    print(r,'r')
     return r if r!=None else []

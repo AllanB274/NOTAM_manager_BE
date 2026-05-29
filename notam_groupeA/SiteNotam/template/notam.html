@@ -24,6 +24,9 @@
 
                     <div class="modal-header">
                         <h5 class="modal-title">NOTAM - <span id="modal-id"></span></h5>
+                        {% if session['statut']!='client' and session['idUser'] %}
+                        <button class="col-auto px-2"><i class="bi bi-pencil-square"></i></button>
+                        {% endif %}
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -134,10 +137,10 @@
         // Posait problème, je sais plus à quoi ça servait, je laisse au cas où
         // const $ = jQuery.noConflict();
         // jQuery(function () {
-        //     $.fn.editable.defaults.mode = 'inline'
-        //     $(".modif").editable()
-        // })
-
+             // $.fn.editable.defaults.mode = 'inline'
+             // $(".modif").editable()
+         // })
+         
         document.querySelectorAll(".open-modal-notam").forEach(button => {
 
             button.addEventListener("click", function () {

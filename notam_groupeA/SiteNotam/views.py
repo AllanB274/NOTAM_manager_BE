@@ -190,16 +190,23 @@ def suppVol(idVol):
 def versvol():
     departure = request.form.get('departure2')
     arrival = request.form.get('arrival2')
-    print(arrival, len(arrival))
-    print(departure, len(departure))
+    print(arrival, len(arrival), "arr")
+    print(departure, len(departure), "dep")
     vol = bdd.verifVolExist(departure, arrival)
     try:
         #Réussite
-        session["arrival"] = vol["arrival"]
-        session["departure"] = vol["departure"]
+        session["idArrivee"] = vol["idArrivee"]
+        session["idDepart"] = vol["idDepart"]
         flash("Bon voyage", "success")
         return redirect("/volsanss")
     except TypeError as err:
         #Refus
-        flash("Réfléchis un peu", "danger")
+        flash("Le vol n'existe pas", "danger")
         return redirect("/")
+
+@app.route("/volsanss")
+def volSansS():
+    lnotamvolsdep = bdd.get_notamsVol(session["idDepart"])
+    lnotamvolsarr = bdd.get_notamsVol(session["idArrivee"])
+    print([i for i in lnotamvolsarr])
+    return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr)

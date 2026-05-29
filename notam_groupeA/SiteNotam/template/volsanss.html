@@ -9,17 +9,6 @@
 <head>
     {% set titre="Sign in" %}
     {% include("layout/head.html") %}
-</head><!-- /*
-* Template Name: Property
-* Template Author: Untree.co
-* Template URI: https://untree.co/
-* License: https://creativecommons.org/licenses/by/3.0/
-*/ -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% set titre="Sign in" %}
-    {% include("layout/head.html") %}
 </head>
 <body>
 {% include("layout/navbar.html") %}
@@ -35,13 +24,23 @@
                 </h1>
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6" data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 30vh; position:center">
-                        {%for i in notams%}
-                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
-                        <div class="col text-truncate">Notam - [compléter avec requete]</div>
-                        <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
-                        {% if session['statut']!='client' and session['idUser'] %}
-                        <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i class="bi bi-trash"></i></a></button>
-                        {% endif %}
+                        {%for i in notamsdep%}
+                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
+                            style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
+                            <div class="col text-truncate">{{i['idNotam']}} - {{i['typeNotam']}} | {{i['description']}}
+                            </div>
+                            <button
+                                class="open-modal-notam col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"
+                                type="button"
+                                data-notam='{{i | tojson}}'
+                                data-bs-toggle="modal"
+                                data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
+                            {% if session['statut']!='client' and session['idUser'] %}
+                            <!--<button class="col-auto px-2" ><div class='modif' data-url = '/updateNotam'
+                                                            data-pk='{{i["idNotam"]}}' ><i class="bi bi-pencil-square"></i></div></button>-->
+                            <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i
+                                        class="bi bi-trash"></i></a></button>
+                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -51,13 +50,23 @@
                 </h1>
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6" data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 30vh;">
-                        {%for i in notams%}
-                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
-                        <div class="col text-truncate">Notam - [compléter avec requete]</div>
-                        <button class="col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"><i class="bi bi-eye"></i></button>
-                        {% if session['statut']!='client' and session['idUser'] %}
-                        <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i class="bi bi-trash"></i></a></button>
-                        {% endif %}
+                        {%for i in notamsarr%}
+                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
+                            style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
+                            <div class="col text-truncate">{{i['idNotam']}} - {{i['typeNotam']}} | {{i['description']}}
+                            </div>
+                            <button
+                                class="open-modal-notam col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"
+                                type="button"
+                                data-notam='{{i | tojson}}'
+                                data-bs-toggle="modal"
+                                data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
+                            {% if session['statut']!='client' and session['idUser'] %}
+                            <!--<button class="col-auto px-2" ><div class='modif' data-url = '/updateNotam'
+                                                            data-pk='{{i["idNotam"]}}' ><i class="bi bi-pencil-square"></i></div></button>-->
+                            <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i
+                                        class="bi bi-trash"></i></a></button>
+                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -65,12 +74,71 @@
             {% if session['statut']!='client' %}
             <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterAirport">Add an airport</a></h5>
             {% endif %}
-            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tout les notams</a></h5>
+            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tous les notams</a></h5>
             </div>
-            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tout les notams</a></h5>
+            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tous les notams</a></h5>
         </div>
     </div>
 </div>
 {% include("layout/footer.html") %}
+<script>
+        // Posait problème, je sais plus à quoi ça servait, je laisse au cas où
+        // const $ = jQuery.noConflict();
+        // jQuery(function () {
+             // $.fn.editable.defaults.mode = 'inline'
+             // $(".modif").editable()
+         // })
+         
+        document.querySelectorAll(".open-modal-notam").forEach(button => {
+
+            button.addEventListener("click", function () {
+                const notam = JSON.parse(this.dataset.notam)
+
+                document.querySelectorAll("#modal-id").forEach(s => {
+                    s.textContent = notam.idNotam
+                })
+                document.getElementById("modal-type").textContent = notam.typeNotam
+                document.getElementById("modal-creneau").textContent = notam.creneau
+                document.getElementById("modal-description").textContent = notam.description
+                document.getElementById("modal-limiteInf").textContent = notam.limite_inferieur
+                document.getElementById("modal-limiteSup").textContent = notam.limite_superieur
+                document.getElementById("modal-typeVol").textContent = notam.typeVol
+                document.getElementById("modal-aerodromeId").textContent = notam.idAerodrome
+                document.getElementById("modal-aerodromeCode").textContent = notam.codeAerodrome
+                document.getElementById("modal-aerodromeNom").textContent = notam.nomAerodrome
+
+                // Dates
+                document.getElementById("modal-dateDecla").textContent =
+                    new Date(notam.date_declaration).toLocaleString()
+
+                document.getElementById("modal-debut").textContent =
+                    new Date(notam.date_debut).toLocaleString()
+
+                document.getElementById("modal-fin").textContent =
+                    new Date(notam.date_fin).toLocaleString()
+            })
+
+        })
+        
+        document.querySelectorAll(".open-modal-aerodrome").forEach(button => {
+
+            button.addEventListener("click", function () {
+
+                const aerodrome = JSON.parse(this.dataset.aerodrome)
+
+                document.querySelectorAll("#modal-aero-id").forEach(s => {
+                    s.textContent = aerodrome.idAerodrome
+                })
+                document.getElementById("modal-aero-code").textContent = aerodrome.codeAerodrome
+                document.getElementById("modal-aero-nom").textContent = aerodrome.nomAerodrome
+                document.getElementById("modal-aero-region").textContent = aerodrome.region
+                document.getElementById("modal-aero-departement").textContent = aerodrome.departement
+                document.getElementById("modal-aero-ville").textContent = aerodrome.ville
+                document.getElementById("modal-aero-pays").textContent = aerodrome.pays
+
+            })
+
+        })
+    </script>
 </body>
 </html>
