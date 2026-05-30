@@ -1,0 +1,125 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% set titre="Add Notam" %}
+    {% include("layout/head.html") %}
+</head>
+
+<body>
+    {% include("layout/navbar.html") %}
+        {% include("layout/bgimg.html") %}
+
+        <div class="container" style="padding: 10em">
+            <div class="row justify-content-center ">
+                <div class="col-lg-9 text-center">
+                    <h1 class="heading text-white" data-aos="fade-up">
+                        Add Notam
+                    </h1>
+
+                    <form
+                        action="/versvol"
+                        class="narrow-w form-search d-flex flex-column gap-3 mb-3"
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                        method="post"
+                    >
+                        <h5 class="text-white">
+                            Id NOTAM
+                        </h5>
+                        <input
+                            type="text"
+                            id="idNotam"
+                            name="idNotam"
+                            class="form-control px-4"
+                            placeholder="Id Notam"
+                        >
+                        </input>
+                        <h5 class="text-white">
+                            Type NOTAM
+                        </h5>
+                        <select
+                            id="typeNotam"
+                            name="typeNotam"
+                            class="form-select px-4"
+                        >
+                            <option value="N">
+                                Notam[N]
+                            </option>
+                            <option value="R">
+                                Notam[R]
+                            </option>
+                            <option value="C">
+                                Notam[C]
+                            </option>
+                        </select>
+
+                        <h5 class="text-white">
+                            Start Date NOTAM
+                        </h5>
+                        <input
+                            type="datetime-local"
+                            id="dateStartNotam"
+                            name="dateStartNotam"
+                            class="form-control px-4"
+                        >
+                        </input>
+
+                        <h5 class="text-white">
+                            End Date NOTAM
+                        </h5>
+                        <!-- attention pour le type, dans le cours il est écris que ce type ne fonctionne pas sur tout les navigateurs -->
+                        <input
+                            type="datetime-local"
+                            id="dateEndNotam"
+                            name="dateEndNotam"
+                            class="form-control px-4"
+                        >
+                        </input>
+
+                        <h5 class="text-white">
+                            Description NOTAM
+                        </h5>
+                        <input
+                            type="text"
+                            id="descNotam"
+                            name="descNotam"
+                            class="form-control px-4"
+                            placeholder="Description Notam"
+                        >
+                        </input>
+
+                        <h5 class="text-white">
+                            Lower Flight Level NOTAM (0-600)
+                        </h5>
+                        <input
+                            type="Number"
+                            min="0"
+                            max="600"
+                            step="5"
+                            id="lowerFLNotam"
+                            name="lowerFLNotam"
+                            class="form-control px-4"
+                            placeholder="Lower Flight Level Notam (0-600)"
+                        >
+                        </input>
+
+                        <button type="submit" class="btn btn-primary">
+                            Check
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    {% include("layout/footer.html") %}
+</body>
+
+</html>

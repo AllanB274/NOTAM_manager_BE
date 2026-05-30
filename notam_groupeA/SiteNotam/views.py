@@ -76,6 +76,9 @@ def ajouterAirport():
     else:
         return render_template("ajouterAirport.html")
 
+@app.route("/ajouterNotam")
+def ajouterNotam():
+    return render_template("ajouterNotam.html")
 
 # about us
 @app.route("/aboutus")
