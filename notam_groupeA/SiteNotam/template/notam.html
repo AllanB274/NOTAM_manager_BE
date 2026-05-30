@@ -80,11 +80,11 @@
 
 
         <div class="container">
-            <div class="row justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center" style="height: 60vh; margin-top: 23vh;">
                 <!-- <div id="filtre">
 
             </div> -->
-                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6"
+                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);" class="col-9"
                     data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 60vh;">
                         {%for i in notams%}
@@ -108,7 +108,7 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div id="airports" style="background-color: rgba(43, 43, 43, 0.5); width:25%;" class="col-4"
+                <div id="airports" style="background-color: rgba(43, 43, 43, 0.5);" class="col-3"
                     data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 60vh;">
                         {% for a in airports %}
@@ -130,6 +130,7 @@
                     </div>
                 </div>
             </div>
+            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterNotam">Ajouter notam</a></h5>
         </div>
     </div>
     {% include("layout/footer.html") %}
