@@ -1,0 +1,83 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% set titre="Edit Notam" %}
+    {% include("layout/head.html") %}
+</head>
+
+<body>
+    {% include("layout/navbar.html") %}
+        {% include("layout/bgimg.html") %}
+
+        <div class="container" style="padding: 10em">
+            <div class="row justify-content-center ">
+                <div class="col-lg-9 text-center">
+                    <h1 class="heading text-white" data-aos="fade-up">
+                        Add Notam
+                    </h1>
+					<table>
+						<tr>
+							<th><h5 class="text-white">Id Notam</h5></th>
+							<td class="modif" data-url="/updateId" data-pk=""></td>
+						</tr>
+						<tr>
+							<th><h5 class="text-white">Type Notam</h5></th>
+							<td class="modifSelect" data-url="/updateType" data-pk=""></td>
+						</tr>
+						<tr>
+							<th><h5 class="text-white">Start Date</h5></th>
+							<td class="modifDate" data-url="/updateSDate" data-pk=""></td>
+						</tr>
+						<tr>
+							<th><h5 class="text-white">End Date</h5></th>
+							<td class="modifDate" data-url="/updateEDate" data-pk=""></td>
+						</tr>
+						<tr>
+							<th><h5 class="text-white">Time Window</h5></th>
+							<td class="modif" data-url="/updateWindow" data-pk=""></td>
+						</tr>
+						<tr>
+							<th><h5 class="text-white">Description</h5></th>
+							<td class="modif" data-url="/updateDesc" data-pk=""></td>
+						</tr>
+						<tr>
+							<th><h5 class="text-white">Floor</h5></th>
+							<td class="modif" data-url="/updateFloor" data-pk=""></td>
+						</tr>
+						<tr>
+							<th><h5 class="text-white">Ceiling</h5></th>
+							<td class="modif" data-url="/updateCeiling" data-pk=""></td>
+						</tr>
+					</table>
+                </div>
+            </div>
+        </div>
+
+    {% include("layout/footer.html") %}
+	<script>
+		const $ = jQuery.noConflict();
+		jQuery(function() {
+		
+			$.fn.editable.defaults.mode = 'inline'
+			$(".modif").editable()
+			
+			$(".modifSelect").editable({
+				type: 'select',
+				source: [
+					{value: 1, text: 'N'},
+					{value: 0, text: 'M'}
+				]
+			})
+			
+			$(".modifDate").editable()
+	</script>
+</body>
+
+</html>
