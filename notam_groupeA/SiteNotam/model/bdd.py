@@ -82,27 +82,50 @@ def update_notam(idNotam, newdesc):
     return bddGen.updateData(func_name(), sql, param, None)
 
 def get_airports():
-    # Renvoie la liste de tout les aéroports
+    # Renvoie la liste de tous les aéroports
     sql = f"SELECT idAerodrome, nomAerodrome FROM aerodrome"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
 def get_notams():
-    # Renvoie la liste de tout les notams
+    # Renvoie la liste de tous les notams
     sql = f"SELECT * FROM Notam"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
 def get_vols():
-    # Renvoie la liste de tout les vols
+    # Renvoie la liste de tous les vols
     sql = f"SELECT * FROM Vol"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
 def get_notamsVol(idAero):
-    # Renvoie la liste de tout les vols
+    # Renvoie la liste de tous les vols
     sql = "SELECT * FROM Notam WHERE idAerodrome=%s"
     param = (idAero,)
-    r = bddGen.selectOneData(func_name(), sql, param)
-    print(r,'r')
+    r = bddGen.selectData(func_name(), sql, param)
     return r if r!=None else []
+
+def get_deroutement(idVol):
+    # Renvoie la liste de tous les aérodromes de déroutement d'un vol
+    l = []
+    sql = "SELECT * FROM degagement_vol WHERE idVol=%s"
+    param = (idVol,)
+    r = bddGen.selectData(func_name(), sql, param)
+    sql2 = "SELECT * FROM Notam WHERE idAerodrome=%s"
+    for i in r:
+        param2 = (i["idDegagement"],)
+        r2 = bddGen.selectData(func_name(), sql2, param2)
+        for j in r2:
+            l.append(j)    # Création d'une liste de dictionnaires contenant les notams de chaque aéroport de déroutement
+    return l if l!=None else []
+
+def get_noms():
+    # Renvoie la liste des noms des aéroports
+    dictnoms = {}
+    sql = "SELECT idAerodrome, nomAerodrome FROM aerodrome"
+    r = bddGen.selectData(func_name(), sql, None)
+    for i in r:
+        #print(i["idAerodrome"],i["nomAerodrome"],'oooooooooooooooooooooo')
+        dictnoms[i["idAerodrome"]] = i["nomAerodrome"]
+    return dictnoms if dictnoms!=None else []

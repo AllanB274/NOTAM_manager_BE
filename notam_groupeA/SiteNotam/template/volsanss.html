@@ -20,7 +20,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-9 text-center">
                 <h1 class="heading" data-aos="fade-up">
-                    Airport 1
+                    {{noms[notamsdep[0]["idAerodrome"]]}}
                 </h1>
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6" data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 30vh; position:center">
@@ -35,18 +35,12 @@
                                 data-notam='{{i | tojson}}'
                                 data-bs-toggle="modal"
                                 data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
-                            {% if session['statut']!='client' and session['idUser'] %}
-                            <!--<button class="col-auto px-2" ><div class='modif' data-url = '/updateNotam'
-                                                            data-pk='{{i["idNotam"]}}' ><i class="bi bi-pencil-square"></i></div></button>-->
-                            <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i
-                                        class="bi bi-trash"></i></a></button>
-                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
                 </div>
                 <h1 class="heading" data-aos="fade-up">
-                    Airport 2
+                    {{noms[notamsarr[0]["idAerodrome"]]}}
                 </h1>
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6" data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 30vh;">
@@ -61,16 +55,36 @@
                                 data-notam='{{i | tojson}}'
                                 data-bs-toggle="modal"
                                 data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
-                            {% if session['statut']!='client' and session['idUser'] %}
-                            <!--<button class="col-auto px-2" ><div class='modif' data-url = '/updateNotam'
-                                                            data-pk='{{i["idNotam"]}}' ><i class="bi bi-pencil-square"></i></div></button>-->
-                            <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i
-                                        class="bi bi-trash"></i></a></button>
-                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
                 </div>
+                <h1 class="heading" data-aos="fade-up">
+                    Rerouting airports
+                </h1>
+                {%for i in dictid.keys()%}
+                <h4 class="heading" data-aos="fade-up">
+                    {{noms[i]}}
+                    {{notamsderoute[i]}}
+                </h4>
+                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6" data-aos="fade-up">
+                    <div style="overflow-y: scroll; height: 30vh;">
+                        {%for j in notamsderoute[i]%}
+                        <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
+                            style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
+                            <div class="col text-truncate">{{j['idNotam']}} - {{j['typeNotam']}} | {{j['description']}}
+                            </div>
+                            <button
+                                class="open-modal-notam col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"
+                                type="button"
+                                data-notam='{{j | tojson}}'
+                                data-bs-toggle="modal"
+                                data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
             {% if session['statut']!='client' %}
             <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterAirport">Add an airport</a></h5>
             {% endif %}

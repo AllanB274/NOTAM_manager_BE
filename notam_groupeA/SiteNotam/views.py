@@ -200,6 +200,7 @@ def versvol():
         #Réussite
         session["idArrivee"] = vol["idArrivee"]
         session["idDepart"] = vol["idDepart"]
+        session["idVol"] = vol["idVol"]
         flash("Bon voyage", "success")
         return redirect("/volsanss")
     except TypeError as err:
@@ -209,7 +210,23 @@ def versvol():
 
 @app.route("/volsanss")
 def volSansS():
+    dictidaero, dictnotamsparaero = {}, {}
+    print('ta grand mère', session["idDepart"], session["idArrivee"])
     lnotamvolsdep = bdd.get_notamsVol(session["idDepart"])
     lnotamvolsarr = bdd.get_notamsVol(session["idArrivee"])
-    print([i for i in lnotamvolsarr])
-    return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr)
+    lnotamderoutement = bdd.get_deroutement(session["idVol"])
+    lnoms = bdd.get_noms()
+    for i,v in enumerate(lnotamderoutement):
+        if v["idAerodrome"] in dictidaero.keys():
+            dictidaero[v["idAerodrome"]] += 1
+        else:
+            dictidaero[v["idAerodrome"]] = 1
+    for i in lnotamderoutement:
+        print(i["idAerodrome"], 'iiiiiiiiiiiiiiiiiiiiiiiiii')
+        if i["idAerodrome"] in dictnotamsparaero.keys():
+            dictnotamsparaero[i["idAerodrome"]].append(i)
+        else:
+            dictnotamsparaero[i["idAerodrome"]] = [i]
+    print(dictidaero)
+    print(dictnotamsparaero)
+    return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr, notamsderoute=dictnotamsparaero, dictid=dictidaero, noms=lnoms)

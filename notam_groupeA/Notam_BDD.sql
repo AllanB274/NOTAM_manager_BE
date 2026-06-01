@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS aerodrome
 (
     idAerodrome INT NOT NULL AUTO_INCREMENT,
     codeAerodrome VARCHAR(4) NOT NULL,
-    nomAerodrome VARCHAR(20),
+    nomAerodrome VARCHAR(50),
     region VARCHAR(20),
     departement VARCHAR(20),
     ville VARCHAR(20),
@@ -112,7 +112,9 @@ INSERT INTO aerodrome (codeAerodrome,nomAerodrome,region,departement,ville,pays)
 VALUES
 ('LFBO','Blagnac','Occitanie','Haute Garonne','Toulouse','France'),
 ('LFLC','Aeroport de clermont ferrand','Auvergne','Puy de domes','Clermont Ferrand','France'),
-('LFBD','Bordeaux-Mérignac','Nouvelle Aquitaine','Gironde', 'Bordeaux','France');
+('LFBD','Bordeaux-Mérignac','Nouvelle Aquitaine','Gironde', 'Bordeaux','France'),
+('LFPG','Roissy Charles-de-Gaulle','Ile-de-France',"Val d'Oise", 'Paris','France');
+
 
 INSERT INTO Objets(nomObjet)
 VALUES
@@ -124,10 +126,15 @@ VALUES
 ('156156', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', 'OULALALALAAAAA LES TRAVAUUUUUX', "FL005", 'FL200', 'IV', 1, 1, 1),
 ('156157', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', 'OULALALALAAAAA LES TRAVAUUUUUX2', "FL005", 'FL200', 'IV', 2, 1, 1),
 ('156159', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', "heureusement que j'avais demandé à Ryan de faire plein d'exemples de notams", "FL005", 'FL200', 'IV', 2, 1, 1),
-('156158', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', 'OULALALALAAAAA LES TRAVAUUUUUX3', "FL005", 'FL200', 'IV', 3, 1, 1);
-
+('156158', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', 'OULALALALAAAAA LES TRAVAUUUUUX3', "FL005", 'FL200', 'IV', 3, 1, 1),
+('156160', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', "j'adore les bases de données", "FL005", 'FL200', 'IV', 4, 1, 1),
+('156161', 'NOTAMN', "2025-11-11 23:13:45", "2026-11-11 23:13:45", '13H-15H', "j'encule les bases de données", "FL005", 'FL200', 'IV', 4, 1, 1);
 
 INSERT INTO Vol(typeVol, nomVol, idUser, idDepart, idArrivee, date_depart, date_arrivee)
 VALUES
-('I', 'la mère de Ryan', 1, 2, 3, "2026-01-01 00:00:00", "2026-01-01 00:00:01")
+('I', 'la mère de Ryan', 1, 2, 3, "2026-01-01 00:00:00", "2026-01-01 00:00:01");
 
+INSERT INTO degagement_vol(idVol, idDegagement)
+VALUES
+('1', '1'),
+('1', '4');
