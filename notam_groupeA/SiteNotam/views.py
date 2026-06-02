@@ -230,3 +230,8 @@ def volSansS():
     print(dictidaero)
     print(dictnotamsparaero)
     return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr, notamsderoute=dictnotamsparaero, dictid=dictidaero, noms=lnoms)
+
+@app.route("/editNotam")
+@f.statuts_obligatoires('admin')
+def editNotam():
+    return render_template("editNotam.html")

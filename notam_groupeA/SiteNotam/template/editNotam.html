@@ -22,7 +22,7 @@
                     <h1 class="heading text-white" data-aos="fade-up">
                         Add Notam
                     </h1>
-					<table>
+					<table class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color:rgba(73,73,73,0.5); z-index:999">
 						<tr>
 							<th><h5 class="text-white">Id Notam</h5></th>
 							<td class="modif" data-url="/updateId" data-pk=""></td>
@@ -30,14 +30,6 @@
 						<tr>
 							<th><h5 class="text-white">Type Notam</h5></th>
 							<td class="modifSelect" data-url="/updateType" data-pk=""></td>
-						</tr>
-						<tr>
-							<th><h5 class="text-white">Start Date</h5></th>
-							<td class="modifDate" data-url="/updateSDate" data-pk=""></td>
-						</tr>
-						<tr>
-							<th><h5 class="text-white">End Date</h5></th>
-							<td class="modifDate" data-url="/updateEDate" data-pk=""></td>
 						</tr>
 						<tr>
 							<th><h5 class="text-white">Time Window</h5></th>
@@ -75,8 +67,7 @@
 					{value: 0, text: 'M'}
 				]
 			})
-			
-			$(".modifDate").editable()
+		})
 	</script>
 </body>
 
