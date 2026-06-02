@@ -12,17 +12,47 @@
 </head>
 <body>
 {% include("layout/navbar.html") %}
-
+<br><br><br><br><br><br><br><br> <!-- en attendant de décrypter la doc du bootstrap -->
 <div class="hero">
     {% include("layout/bgimg.html") %}
 
+    <div class="modal fade" id="ModalNotam" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">NOTAM - <span id="modal-id"></span></h5>
+                    {% if session['statut']!='client' and session['idUser'] %}
+                    <button class="col-auto px-2"><i class="bi bi-pencil-square"></i></button>
+                    {% endif %}
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p>ID : <span id="modal-id"></span></p>
+                    <p>Type : <span id="modal-type"></span></p>
+                    <p>Date de déclaration : <span id="modal-dateDecla"></span></p>
+                    <p>Date de début : <span id="modal-debut"></span></p>
+                    <p>Date de fin : <span id="modal-fin"></span></p>
+                    <p>Creneau : <span id="modal-creneau"></span></p>
+                    <p>Description : <span id="modal-description"></span></p>
+                    <p>Limite inférieure : <span id="modal-limiteInf"></span></p>
+                    <p>Limite supérieure : <span id="modal-limiteSup"></span></p>
+                    <p>Type de Vol : <span id="modal-typeVol"></span></p>
+                    <p>Aerodome concerné : <span id="modal-aerodromeId"></span> - <span id="modal-aerodromeCode"></span> <span id="modal-aerodromeNom"></span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-lg-9 text-center">
+            <div class="col-lg-9 text-center align-items-center">
                 <h1 class="heading" data-aos="fade-up">
                     {{noms[notamsdep[0]["idAerodrome"]]}}
                 </h1>
-                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6" data-aos="fade-up">
+                <div id="notamsdep" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="container-fluid text-center" data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 30vh; position:center">
                         {%for i in notamsdep%}
                         <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
@@ -42,7 +72,7 @@
                 <h1 class="heading" data-aos="fade-up">
                     {{noms[notamsarr[0]["idAerodrome"]]}}
                 </h1>
-                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6" data-aos="fade-up">
+                <div id="notamsarr" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="container-fluid text-center" data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 30vh;">
                         {%for i in notamsarr%}
                         <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
@@ -59,15 +89,16 @@
                         {% endfor %}
                     </div>
                 </div>
-                <h1 class="heading" data-aos="fade-up">
+                <h1 class="heading">
                     Rerouting airports
                 </h1>
+                <div class="container-fluid text-center" style="background-color:rgba(73,73,73,0.3); overflow-y: scroll; height: 60vh;">
                 {%for i in dictid.keys()%}
-                <h4 class="heading" data-aos="fade-up">
-                    {{noms[i]}}
-                    {{notamsderoute[i]}}
-                </h4>
-                <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6">
+                    <h4 class="text-white">
+                        {{noms[i]}}
+                    </h4>
+                <div id="notamsderoute" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="container-fluid text-center">
+
                     <div style="overflow-y: scroll; height: 30vh;">
                         {%for j in notamsderoute[i]%}
                         <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
@@ -85,24 +116,19 @@
                     </div>
                 </div>
                 {% endfor %}
+                </div>
             {% if session['statut']!='client' %}
-            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterAirport">Add an airport</a></h5>
+                <div class="container">
+            <h5 class="text-white"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterAirport">Add an airport</a></h5>
             {% endif %}
-            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tous les notams</a></h5>
+            <h5 class="text-white"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tous les notams</a></h5>
+                </div>
             </div>
-            <h5 data-aos="fade-up"><a style="color:rgba(200, 200, 200, 0.58)" href="/notam">Voir tous les notams</a></h5>
         </div>
     </div>
 </div>
 {% include("layout/footer.html") %}
 <script>
-        // Posait problème, je sais plus à quoi ça servait, je laisse au cas où
-        // const $ = jQuery.noConflict();
-        // jQuery(function () {
-             // $.fn.editable.defaults.mode = 'inline'
-             // $(".modif").editable()
-         // })
-         
         document.querySelectorAll(".open-modal-notam").forEach(button => {
 
             button.addEventListener("click", function () {
