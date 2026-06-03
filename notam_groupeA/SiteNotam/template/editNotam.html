@@ -19,33 +19,33 @@
         <div class="container" style="padding: 10em">
             <div class="row justify-content-center ">
                 <div class="col-lg-9 text-center">
-                    <h1 class="heading text-white" data-aos="fade-up">
+                    <h1 class="heading" style="color:rgb(255,255,255)" data-aos="fade-up">
                         Add Notam
                     </h1>
-					<table class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color:rgba(73,73,73,0.5); z-index:999">
+					<table class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color:rgba(73,73,73,0.5); z-index:999" data-aos="fade-up">
 						<tr>
-							<th><h5 class="text-white">Id Notam</h5></th>
-							<td class="modif" data-url="/updateId" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Id Notam</h3></th>
+							<td class="modif" data-url="/updateId" data-pk="">{{notam['idNotam']}}</td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Type Notam</h5></th>
-							<td class="modifSelect" data-url="/updateType" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Type Notam</h3></th>
+							<td class="modifSelect" data-url="/updateType" data-pk="">{{notam['typeNotam']}}</td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Time Window</h5></th>
-							<td class="modif" data-url="/updateWindow" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Time Window</h3></th>
+							<td class="modif" data-url="/updateWindow" data-pk="">{{notam['creneau']}}</td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Description</h5></th>
-							<td class="modif" data-url="/updateDesc" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Description</h3></th>
+							<td class="modif" data-url="/updateDesc" data-pk="">{{notam['description']}}</td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Floor</h5></th>
-							<td class="modif" data-url="/updateFloor" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Floor</h3></th>
+							<td class="modif" data-url="/updateFloor" data-pk="">{{notam['limite_inferieur']}}</td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Ceiling</h5></th>
-							<td class="modif" data-url="/updateCeiling" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Ceiling</h3></th>
+							<td class="modif" data-url="/updateCeiling" data-pk="">{{notam['limite_superieur']}}</td>
 						</tr>
 					</table>
                 </div>

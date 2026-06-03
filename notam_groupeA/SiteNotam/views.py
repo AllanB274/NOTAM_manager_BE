@@ -173,12 +173,9 @@ def suppNotam(idNotam):
     bdd.del_notamData(idNotam,msg)
     return redirect("/notam")
 
-@app.route("/updateNotam", methods=['POST'])
+@app.route("/updateNotam")
 def updateNotam():
-    idNotam = request.form['pk']
-    newdesc = request.form['value']
-    bdd.update_notam(idNotam, newdesc)
-    return "1"
+    return render_template("editNotam.html")
 
 @app.route("/suppVol/<idVol>")
 def suppVol(idVol):
@@ -231,7 +228,19 @@ def volSansS():
     print(dictnotamsparaero)
     return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr, notamsderoute=dictnotamsparaero, dictid=dictidaero, noms=lnoms)
 
-@app.route("/editNotam")
+@app.route("/editNotam", methods=["POST"])
 @f.statuts_obligatoires('admin')
 def editNotam():
-    return render_template("editNotam.html")
+    notam = request.form['edit']
+    linfos = []
+    temp = ''
+    for i in notam :
+        if i != '$':
+            temp += i
+        else:
+            linfos.append(temp)
+            temp = ''
+    print(notam, 'nnnnnnnnnnnnnnnnnnnnnnn')
+    print(type(notam))
+    print(notam['typeNotam'], 'ttttttttttttttttttttttttttttttttttttttttttttttt')
+    return render_template('editNotam.html', notam=notam)
