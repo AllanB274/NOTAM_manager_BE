@@ -10,6 +10,8 @@
 <head>
     {% set titre="Edit Notam" %}
     {% include("layout/head.html") %}
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-edi
+table/css/bootstrap-editable.css" />
 </head>
 
 <body>
@@ -19,33 +21,39 @@
         <div class="container" style="padding: 10em">
             <div class="row justify-content-center ">
                 <div class="col-lg-9 text-center">
-                    <h1 class="heading text-white" data-aos="fade-up">
+                    <h1 class="heading" style="color:rgb(255,255,255)" data-aos="fade-up">
                         Add Notam
                     </h1>
-					<table class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color:rgba(73,73,73,0.5); z-index:999">
+					<table class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color:rgba(73,73,73,0.5)" data-aos="fade-up">
 						<tr>
-							<th><h5 class="text-white">Id Notam</h5></th>
-							<td class="modif" data-url="/updateId" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Id Notam</h3></th>
+							<td></td>
+							<td class="modif" data-url="/updateId" data-pk="{{notam[0]}}"><h6 class="text-white lh-lg text-center justify-content-end">{{notam[0]}}</h6></td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Type Notam</h5></th>
-							<td class="modifSelect" data-url="/updateType" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Type Notam</h3></th>
+							<td></td>
+							<td class="modifSelect" data-url="/updateType" data-pk=""><h6 class="text-white lh-lg text-center justify-content-end">{{notam[1]}}</h6></td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Time Window</h5></th>
-							<td class="modif" data-url="/updateWindow" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Time Window</h3></th>
+							<td></td>
+							<td class="modif" data-url="/updateWindow" data-pk=""><h6 class="text-white lh-lg text-center justify-content-end">{{notam[2]}}</h6></td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Description</h5></th>
-							<td class="modif" data-url="/updateDesc" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Description</h3></th>
+							<td></td>
+							<td class="modif" data-url="/updateDesc" data-pk=""><h6 class="text-white lh-base text-center justify-content-end">{{notam[3]}}</h6></td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Floor</h5></th>
-							<td class="modif" data-url="/updateFloor" data-pk=""></td>
+							<th><h3 class="text-white lh-lg">Floor</h3></th>
+							<td></td>
+							<td class="modif" data-url="/updateFloor" data-pk=""><h6 class="text-white lh-lg text-center justify-content-end">{{notam[4]}}</h6></td>
 						</tr>
 						<tr>
-							<th><h5 class="text-white">Ceiling</h5></th>
-							<td class="modif" data-url="/updateCeiling" data-pk=""></td>
+							<th class="col-4"><h3 class="text-white lh-lg">Ceiling</h3></th>
+							<td class="col-4"></td>
+							<td class="modif col-4" data-url="/updateCeiling" data-pk=""><h6 class="text-white lh-lg text-center justify-content-end">{{notam[5]}}</h6></td>
 						</tr>
 					</table>
                 </div>
@@ -53,6 +61,9 @@
         </div>
 
     {% include("layout/footer.html") %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstr
+ap-editable.min.js"></script>
 	<script>
 		const $ = jQuery.noConflict();
 		jQuery(function() {
@@ -63,8 +74,9 @@
 			$(".modifSelect").editable({
 				type: 'select',
 				source: [
-					{value: 1, text: 'N'},
-					{value: 0, text: 'M'}
+					{value: 1, text: 'NOTAMN'},
+					{value: 0, text: 'NOTAMM'},
+					{value: 2, text: 'NOTAMR'}
 				]
 			})
 		})
