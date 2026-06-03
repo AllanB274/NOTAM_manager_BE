@@ -55,6 +55,7 @@ def add_membreData(rform, msg=None):
 
 
     param = (rform['lastname'], rform['firstname'], rform['username'], mdpC, rform.get('role'), avatar)
+
     return bddGen.addData(func_name(), sql, param, msg)
 
 
@@ -74,6 +75,18 @@ def add_airportData(rform, msg=None):
     (codeAerodrome, nomAerodrome, region, departement, ville, pays)
     VALUES (%s, %s, %s, %s, %s, %s); """
     param = ( rform['codeAerodrome'], rform['nomAerodrome'], rform['region'], rform['departement'], rform['ville'], rform['pays'] )
+
+        #verification champs nuls :
+    for a in param:
+        if a=='':
+            raise TypeError("remplir les champs exigez")
+        
+        #verification deja existant :
+    sql2 = "SELECT * FROM aerodrome WHERE codeAerodrome=%s"
+    param2 = (rform['codeAerodrome'],)
+    if bddGen.selectOneData(func_name(), sql2, param2):
+        raise TypeError("code Aerodrome deja existant")
+
     return bddGen.addData(func_name(), sql, param, msg)
 
 def update_notam(idNotam, newdesc):

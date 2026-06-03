@@ -18,7 +18,7 @@
 
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-11 col-xl-10 text-center">
+            <div class="col-12 text-center">
                 <h1 class="heading" data-aos="fade-up">
                     Sign up
                 </h1>
@@ -34,8 +34,8 @@
 
 
                     <div class="container-fluid">
-                        <div class="row justify-content-start align-items-center">
-                            <div class="col-4 mx-2 lh-lg">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-3 mx-2">
                                 <div class="row mb-2">
 
                                     <input
@@ -89,12 +89,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-4 mb-3">
+                            <div class="col-3 mb-3">
                                 <label class="text-white mb-2">Choisissez votre avatar :</label>
                                 <div class="row g-2">
                                     {% for i in range(1, 13) %}
                                     <div class="col-4 text-center">
-                                        <input type="radio" name="avatar" id="avatar{{i}}" value="{{i}}" class="btn-check" {% if i == 1 %}checked{% endif %}>
+                                        <input type="radio" name="avatar" id="avatar{{i}}" value="{{i}}.png" class="btn-check" {% if i == 1 %}checked{% endif %}>
                                         <label class="btn btn-outline-light p-1 rounded-circle" for="avatar{{i}}">
                                             <img src="/static/img/avatar/{{i}}.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px; object-fit: cover;"/>
                                         </label>

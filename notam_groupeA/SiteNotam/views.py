@@ -71,8 +71,13 @@ def ajouterAirport():
             "ok":"Nouvel Aeroport inséré",
             "echec":"Problème ajout Aeroport"
         }
-        bdd.add_airportData(rform,msg)
-        return redirect("/vols")
+        try :
+            bdd.add_airportData(rform,msg)
+            return redirect("/vols")
+        except TypeError as err:
+        #Refus
+            flash("Airport refused", "danger")
+            return redirect("/ajouterAirport")
     else:
         return render_template("ajouterAirport.html")
 
