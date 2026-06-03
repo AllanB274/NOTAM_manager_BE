@@ -129,3 +129,8 @@ def get_noms():
         #print(i["idAerodrome"],i["nomAerodrome"],'oooooooooooooooooooooo')
         dictnoms[i["idAerodrome"]] = i["nomAerodrome"]
     return dictnoms if dictnoms!=None else []
+
+def update_idData(idNotam, newvalue):
+    sql = "UPDATE Notam SET idNotam=%s WHERE idNotam=%s;"
+    param = (newvalue, idNotam)
+    return bddGen.updateData(func_name(), sql, param, None)

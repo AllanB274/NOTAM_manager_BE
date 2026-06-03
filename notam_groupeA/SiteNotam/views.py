@@ -173,10 +173,6 @@ def suppNotam(idNotam):
     bdd.del_notamData(idNotam,msg)
     return redirect("/notam")
 
-@app.route("/updateNotam")
-def updateNotam():
-    return render_template("editNotam.html")
-
 @app.route("/suppVol/<idVol>")
 def suppVol(idVol):
     msg= {
@@ -240,7 +236,12 @@ def editNotam():
         else:
             linfos.append(temp)
             temp = ''
-    print(notam, 'nnnnnnnnnnnnnnnnnnnnnnn')
-    print(type(notam))
-    print(notam['typeNotam'], 'ttttttttttttttttttttttttttttttttttttttttttttttt')
-    return render_template('editNotam.html', notam=notam)
+    return render_template('editNotam.html', notam=linfos)
+
+@app.route("/updateId", methods=['POST'])
+def updateId():
+    # réception des données du formulaire
+    idNotam = request.form['pk']
+    newvalue = request.form['value']
+    bdd.update_idData(idNotam, newvalue)
+    return "1"
