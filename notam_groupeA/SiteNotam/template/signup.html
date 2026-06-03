@@ -18,79 +18,129 @@
 
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-lg-9 text-center">
+            <div class="col-11 col-xl-10 text-center">
                 <h1 class="heading" data-aos="fade-up">
                     Sign up
                 </h1>
                 <form
                         action="\signup"
-                        class="narrow-w form-search d-flex align-items-stretch mb-3"
+                        class="w-100 mb-3"
                         data-aos="fade-up"
                         data-aos-delay="200"
                         method="post"
                 >
-                    <input
-                            id = "lastname"
-                            name = "lastname"
-                            type="text"
-                            class="form-control px-3"
-                            placeholder="Last name"
-                    />
-                    <input
-                            id = "firstname"
-                            name = "firstname"
-                            type="text"
-                            class="form-control px-3"
-                            placeholder="First name"
-                    />
-                    <br>
-                    <input
-                            id = "username"
-                            name = "username"
-                            type="text"
-                            class="form-control px-3"
-                            placeholder="username"
-                    />
-                    <input
-                            id ="mdp"
-                            name = "mdp"
-                            type="password"
-                            class="form-control px-3"
-                            placeholder="Password"
-                    />
-                    <h5>Choisissez un avatar</h5>
-                    {% for i in range(0,4) %}
-                    <div class = "row mb-3">
-                        
-                        {% for j in range(1,4) %}
-                          <div class="col"> j / 3</div>
-                          <input type="radio" name="avatar" value="{{3*i + j}}.png">
-                          <img src="/static/img/avatar/{{3*i + j}}.png" class="user-avatar"/>
-                        {% endfor %}
-                    {% endfor %}
+
+
+
+
+                    <div class="container-fluid">
+                        <div class="row justify-content-start">
+                            <div class="col mx-2 lh-lg">
+                                <div class="row mb-2">
+
+                                    <input
+                                            id = "lastname"
+                                            name = "lastname"
+                                            type="text"
+                                            style="border-radius: 50px;"
+                                            class="form-control px-3"
+                                            placeholder="Last name"
+                                    />
+
+                                </div>
+
+                                <div class="row mb-2">
+                                        
+                                    <input
+                                            id = "firstname"
+                                            name = "firstname"
+                                            type="text"
+                                            style="border-radius: 50px;"
+                                            class="form-control px-3"
+                                            placeholder="First name"
+                                    />
+
+                                </div>
+
+                                <div class="row mb-2">
+
+                                    <input
+                                            id = "username"
+                                            name = "username"
+                                            type="text"
+                                            style="border-radius: 50px;"
+                                            class="form-control px-3"
+                                            placeholder="username"
+                                    />
+
+                                </div>
+
+                                <div class="row mb-2">
+
+                                    <input
+                                            id ="mdp"
+                                            name = "mdp"
+                                            type="password"
+                                            style="border-radius: 50px;"
+                                            class="form-control px-3"
+                                            placeholder="Password"
+                                    />
+
+                                </div>
+                            </div>
+
+
+                                    {% for i in range(0,3) %}
+                                    <div class = "col-1">
+                                        
+                                        {% for j in range(1,5) %}
+                                        <div class="row mb-2">
+                                            <input type="radio" name="avatar" value="{{3*i + j}}.png">
+                                            <img src="/static/img/avatar/{{3*i + j}}.png" class="user-avatar"/>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                    {% endfor %}
+
+                            <div class="col-2 align-self-center mx-2">
+
+                                <div class="row mb-2">
+                            
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="role" id="admin", value="admin">
+                                        <label class="form-check-label text-white" for="radioDefault1">
+                                            Admin
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="role" id="client", value="client" checked>
+                                        <label class="form-check-label text-white" for="radioDefault2">
+                                            Client
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+
+                                    <input
+                                            id = "mdpAdmin"
+                                            name = "mdpAdmin"
+                                            type="password"
+                                            class="form-control px-3"
+                                            placeholder="Admin key if admin"
+                                    />
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="row-4 justify-content-center align-items-center">
+                                <button type="submit" class="btn btn-primary">Sign-up</button>
+                            </div>
+                        </div>
                     </div>
-                    
-                    
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role" id="admin", value="admin">
-                          <label class="form-check-label text-white" for="radioDefault1">
-                            Admin
-                          </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role" id="client", value="client" checked>
-                          <label class="form-check-label text-white" for="radioDefault2">
-                            Client
-                          </label>
-                      </div>
-                    <input
-                            id = "mdpAdmin"
-                            name = "mdpAdmin"
-                            type="password"
-                            class="form-control px-3"
-                            placeholder="Admin key if admin"
-                    />
-                    <button type="submit" class="btn btn-primary">Sign-up</button>
                 </form>
             </div>
         </div>
