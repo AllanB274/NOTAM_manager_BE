@@ -65,6 +65,11 @@ def del_notamData(idNotam, msg=None):
     param = (idNotam,)
     return bddGen.deleteData(func_name(),sql, param, msg)
 
+def del_aeroportData(idAeroport, msg=None):
+    sql = "DELETE FROM aerodrome WHERE idAerodrome=%s;"
+    param = (idAeroport,)
+    return bddGen.deleteData(func_name(),sql, param, msg)
+
 def del_volData(idVol, msg=None):
     sql = "DELETE FROM Vol WHERE idVol=%s;"
     param = (idVol,)
@@ -139,11 +144,44 @@ def get_noms():
     sql = "SELECT idAerodrome, nomAerodrome FROM aerodrome"
     r = bddGen.selectData(func_name(), sql, None)
     for i in r:
-        #print(i["idAerodrome"],i["nomAerodrome"],'oooooooooooooooooooooo')
         dictnoms[i["idAerodrome"]] = i["nomAerodrome"]
     return dictnoms if dictnoms!=None else []
 
+def get_oaci():
+    # Renvoie la liste des codes oaci des aéroports
+    dictoaci = {}
+    sql = "SELECT idAerodrome, codeAerodrome FROM aerodrome"
+    r = bddGen.selectData(func_name(), sql, None)
+    for i in r:
+        dictoaci[i["idAerodrome"]] = i["codeAerodrome"]
+    return dictoaci if dictoaci!=None else []
+
 def update_idData(idNotam, newvalue):
     sql = "UPDATE Notam SET idNotam=%s WHERE idNotam=%s;"
+    param = (newvalue, idNotam)
+    return bddGen.updateData(func_name(), sql, param, None)
+
+def update_typeData(idNotam, newvalue):
+    sql = "UPDATE Notam SET typeNotam=%s WHERE idNotam=%s;"
+    param = (newvalue, idNotam)
+    return bddGen.updateData(func_name(), sql, param, None)
+
+def update_windowData(idNotam, newvalue):
+    sql = "UPDATE Notam SET creneau=%s WHERE idNotam=%s;"
+    param = (newvalue, idNotam)
+    return bddGen.updateData(func_name(), sql, param, None)
+
+def update_descData(idNotam, newvalue):
+    sql = "UPDATE Notam SET description=%s WHERE idNotam=%s;"
+    param = (newvalue, idNotam)
+    return bddGen.updateData(func_name(), sql, param, None)
+
+def update_floorData(idNotam, newvalue):
+    sql = "UPDATE Notam SET limite_inferieur=%s WHERE idNotam=%s;"
+    param = (newvalue, idNotam)
+    return bddGen.updateData(func_name(), sql, param, None)
+
+def update_ceilingData(idNotam, newvalue):
+    sql = "UPDATE Notam SET limite_superieur=%s WHERE idNotam=%s;"
     param = (newvalue, idNotam)
     return bddGen.updateData(func_name(), sql, param, None)
