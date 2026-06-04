@@ -85,7 +85,8 @@ def ajouterAirport():
 
 @app.route("/ajouterNotam")
 def ajouterNotam():
-    return render_template("ajouterNotam.html")
+    airports = bdd.get_airports()
+    return render_template("ajouterNotam.html", airports=airports)
 
 # about us
 @app.route("/aboutus")
