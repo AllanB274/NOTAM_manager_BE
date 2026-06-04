@@ -95,7 +95,7 @@
                             <button
                                 class="open-modal-notam col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"
                                 type="button"
-                                data-notam='{{i | tojson}}'
+                                data-notam="{{i | tojson}}"
                                 data-bs-toggle="modal"
                                 data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
                             {% if session['statut']!='client' and session['idUser'] %}
@@ -121,8 +121,8 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#ModalAerodrome"><i class="bi bi-eye"></i></button>
                             {% if session['statut']!='client' and session['idUser'] %}
-                            <button class="col-auto px-2"><i class="bi bi-pencil-square"></i></button>
-                            <button class="col-auto px-2"><i class="bi bi-trash"></i></button>
+                            <button class="col-auto px-2"><a href="/suppAeroport/{{a['idAerodrome']}}"><i
+                                    class="bi bi-trash"></i></a></button>
                             {% endif %}
                         </div>
                         {% endfor %}
@@ -133,17 +133,11 @@
     </div>
     {% include("layout/footer.html") %}
     <script>
-        // Posait problème, je sais plus à quoi ça servait, je laisse au cas où
-        // const $ = jQuery.noConflict();
-        // jQuery(function () {
-             // $.fn.editable.defaults.mode = 'inline'
-             // $(".modif").editable()
-         // })
          
         document.querySelectorAll(".open-modal-notam").forEach(button => {
 
             button.addEventListener("click", function () {
-                const notam = JSON.parse(this.dataset.notam)
+                const notam = JSON.parse(this.dataset.notam);
 
                 document.querySelectorAll("#modal-id").forEach(s => {
                     s.textContent = notam.idNotam

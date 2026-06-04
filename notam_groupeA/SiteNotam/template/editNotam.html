@@ -18,44 +18,39 @@ table/css/bootstrap-editable.css" />
     {% include("layout/navbar.html") %}
         {% include("layout/bgimg.html") %}
 
+
         <div class="container" style="padding: 10em">
             <div class="row justify-content-center ">
                 <div class="col-lg-9 text-center">
                     <h1 class="heading" style="color:rgb(255,255,255)" data-aos="fade-up">
                         Add Notam
                     </h1>
-					<table class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color:rgba(73,73,73,0.5)" data-aos="fade-up">
-						<tr>
-							<th><h3 class="text-white lh-lg">Id Notam</h3></th>
-							<td></td>
-							<td class="modif" data-url="/updateId" data-pk="{{notam[0]}}"><h6 class="text-white lh-lg text-center justify-content-end">{{notam[0]}}</h6></td>
-						</tr>
-						<tr>
-							<th><h3 class="text-white lh-lg">Type Notam</h3></th>
-							<td></td>
-							<td class="modifSelect" data-url="/updateType" data-pk=""><h6 class="text-white lh-lg text-center justify-content-end">{{notam[1]}}</h6></td>
-						</tr>
-						<tr>
-							<th><h3 class="text-white lh-lg">Time Window</h3></th>
-							<td></td>
-							<td class="modif" data-url="/updateWindow" data-pk=""><h6 class="text-white lh-lg text-center justify-content-end">{{notam[2]}}</h6></td>
-						</tr>
-						<tr>
-							<th><h3 class="text-white lh-lg">Description</h3></th>
-							<td></td>
-							<td class="modif" data-url="/updateDesc" data-pk=""><h6 class="text-white lh-base text-center justify-content-end">{{notam[3]}}</h6></td>
-						</tr>
-						<tr>
-							<th><h3 class="text-white lh-lg">Floor</h3></th>
-							<td></td>
-							<td class="modif" data-url="/updateFloor" data-pk=""><h6 class="text-white lh-lg text-center justify-content-end">{{notam[4]}}</h6></td>
-						</tr>
-						<tr>
-							<th class="col-4"><h3 class="text-white lh-lg">Ceiling</h3></th>
-							<td class="col-4"></td>
-							<td class="modif col-4" data-url="/updateCeiling" data-pk=""><h6 class="text-white lh-lg text-center justify-content-end">{{notam[5]}}</h6></td>
-						</tr>
-					</table>
+					<div class="justify-content-center align-items-center flex-nowrap gx-0 ps-1" style="background-color:rgba(73,73,73,0.5)" data-aos="fade-up">
+						<div class="row">
+							<div class="col-6 justify-content-center align-items-center"><h3 class="text-white lh-lg">Id Notam</h3></div>
+							<div class="modif col-6 text-white" data-url="/updateId" data-pk="{{notam[0]}}"><h6 class="text-white lh-lg text-center justify-content-end">{{notam[0]}}</h6></div>
+						</div>
+						<div class="row">
+							<div class="col-6 justify-content-center align-items-center"><h3 class="text-white lh-lg">Type Notam</h3></div>
+							<div class="modifSelect col-6 text-white" data-url="/updateType" data-pk="{{notam[0]}}"><h6 class="text-white lh-lg text-center justify-content-end">{{notam[1]}}</h6></div>
+						</div>
+						<div class="row">
+							<div class="col-6 justify-content-center align-items-center"><h3 class="text-white lh-lg">Time Window</h3></div>
+							<div class="modif col-6 text-white" data-url="/updateWindow" data-pk="{{notam[0]}}"><h6 class="text-white lh-lg text-center justify-content-end">{{notam[2]}}</h6></div>
+						</div>
+						<div class="row">
+							<div class="col-6 justify-content-center align-items-center"><h3 class="text-white lh-lg">Description</h3></div>
+							<div class="modif col-6 text-white" data-url="/updateDesc" data-pk="{{notam[0]}}"><h6 class="text-white lh-base text-center justify-content-end">{{notam[3]}}</h6></div>
+						</div>
+						<div class="row">
+							<div class="col-6 justify-content-center align-items-center"><h3 class="text-white lh-lg">Floor</h3></div>
+							<div class="modif col-6 text-white" data-url="/updateFloor" data-pk="{{notam[0]}}"><h6 class="text-white lh-lg text-center justify-content-end">{{notam[4]}}</h6></div>
+						</div>
+						<div class="row">
+							<div class="col-6 justify-content-center align-items-center"><h3 class="text-white lh-lg">Ceiling</h3></div>
+							<div class="modif col-6 text-white" data-url="/updateCeiling" data-pk="{{notam[0]}}"><h6 class="text-white lh-lg text-center justify-content-end">{{notam[5]}}</h6></div>
+						</div>
+					</div>
                 </div>
             </div>
         </div>
@@ -69,7 +64,7 @@ ap-editable.min.js"></script>
 		jQuery(function() {
 		
 			$.fn.editable.defaults.mode = 'inline'
-			$(".modif").editable()
+			$(".modif").editable('option', 'validate')
 			
 			$(".modifSelect").editable({
 				type: 'select',

@@ -65,6 +65,11 @@
                                 data-notam='{{i | tojson}}'
                                 data-bs-toggle="modal"
                                 data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
+                            {% if session['statut']!='client' and session['idUser'] %}
+                            <form class="col-auto px-2" action="editNotam" method="POST"><button class="col-auto px-2" type="submit" name="edit" value="{{i['idNotam']}}${{i['typeNotam']}}${{i['creneau']}}${{i['description']}}${{i['limite_inferieur']}}${{i['limite_superieur']}}$"><i class="bi bi-pencil-square"></i></button></form>
+                            <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i
+                                    class="bi bi-trash"></i></a></button>
+                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -85,6 +90,11 @@
                                 data-notam='{{i | tojson}}'
                                 data-bs-toggle="modal"
                                 data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
+                            {% if session['statut']!='client' and session['idUser'] %}
+                            <form class="col-auto px-2" action="editNotam" method="POST"><button class="col-auto px-2" type="submit" name="edit" value="{{i['idNotam']}}${{i['typeNotam']}}${{i['creneau']}}${{i['description']}}${{i['limite_inferieur']}}${{i['limite_superieur']}}$"><i class="bi bi-pencil-square"></i></button></form>
+                            <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i
+                                    class="bi bi-trash"></i></a></button>
+                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -111,6 +121,11 @@
                                 data-notam='{{j | tojson}}'
                                 data-bs-toggle="modal"
                                 data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
+                            {% if session['statut']!='client' and session['idUser'] %}
+                            <form class="col-auto px-2" action="editNotam" method="POST"><button class="col-auto px-2" type="submit" name="edit" value="{{i['idNotam']}}${{i['typeNotam']}}${{i['creneau']}}${{i['description']}}${{i['limite_inferieur']}}${{i['limite_superieur']}}$"><i class="bi bi-pencil-square"></i></button></form>
+                            <button class="col-auto px-2"><a href="/suppNotam/{{i['idNotam']}}"><i
+                                    class="bi bi-trash"></i></a></button>
+                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
