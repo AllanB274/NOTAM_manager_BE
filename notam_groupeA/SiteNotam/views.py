@@ -25,7 +25,9 @@ def index():
 def notam():
     lnotam = bdd.get_notams()
     lairports = bdd.get_airports()
-    return render_template("notam.html", notams=lnotam, airports=lairports)
+    lcodes = bdd.get_oaci()
+    print(type(lcodes[lnotam[1]['idAerodrome']]))
+    return render_template("notam.html", notams=lnotam, airports=lairports, codes=lcodes)
 
 # page sgbd
 @app.route("/vols")
@@ -178,6 +180,15 @@ def suppNotam(idNotam):
     bdd.del_notamData(idNotam,msg)
     return redirect("/notam")
 
+@app.route("/suppAeroport/<idAeroport>")
+def suppAeroport(idAeroport):
+    msg= {
+        "ok":"L'aéroport' a bien été supprimé",
+        "echec":"Problème suppression aéroport"
+    }
+    bdd.del_aeroportData(idAeroport,msg)
+    return redirect("/notam")
+
 @app.route("/suppVol/<idVol>")
 def suppVol(idVol):
     msg= {
@@ -209,7 +220,6 @@ def versvol():
 @app.route("/volsanss")
 def volSansS():
     dictidaero, dictnotamsparaero = {}, {}
-    print('ta grand mère', session["idDepart"], session["idArrivee"])
     lnotamvolsdep = bdd.get_notamsVol(session["idDepart"])
     lnotamvolsarr = bdd.get_notamsVol(session["idArrivee"])
     lnotamderoutement = bdd.get_deroutement(session["idVol"])
@@ -220,13 +230,10 @@ def volSansS():
         else:
             dictidaero[v["idAerodrome"]] = 1
     for i in lnotamderoutement:
-        print(i["idAerodrome"], 'iiiiiiiiiiiiiiiiiiiiiiiiii')
         if i["idAerodrome"] in dictnotamsparaero.keys():
             dictnotamsparaero[i["idAerodrome"]].append(i)
         else:
             dictnotamsparaero[i["idAerodrome"]] = [i]
-    print(dictidaero)
-    print(dictnotamsparaero)
     return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr, notamsderoute=dictnotamsparaero, dictid=dictidaero, noms=lnoms)
 
 @app.route("/editNotam", methods=["POST"])
@@ -249,4 +256,44 @@ def updateId():
     idNotam = request.form['pk']
     newvalue = request.form['value']
     bdd.update_idData(idNotam, newvalue)
+    return "1"
+
+@app.route("/updateType", methods=['POST'])
+def updateType():
+    # réception des données du formulaire
+    idNotam = request.form['pk']
+    newvalue = request.form['value']
+    bdd.update_typeData(idNotam, newvalue)
+    return "1"
+
+@app.route("/updateWindow", methods=['POST'])
+def updateWindow():
+    # réception des données du formulaire
+    idNotam = request.form['pk']
+    newvalue = request.form['value']
+    bdd.update_windowData(idNotam, newvalue)
+    return "1"
+
+@app.route("/updateDesc", methods=['POST'])
+def updateDesc():
+    # réception des données du formulaire
+    idNotam = request.form['pk']
+    newvalue = request.form['value']
+    bdd.update_descData(idNotam, newvalue)
+    return "1"
+
+@app.route("/updateFloor", methods=['POST'])
+def updateFloor():
+    # réception des données du formulaire
+    idNotam = request.form['pk']
+    newvalue = request.form['value']
+    bdd.update_floorData(idNotam, newvalue)
+    return "1"
+
+@app.route("/updateCeiling", methods=['POST'])
+def updateCeiling():
+    # réception des données du formulaire
+    idNotam = request.form['pk']
+    newvalue = request.form['value']
+    bdd.update_ceilingData(idNotam, newvalue)
     return "1"
