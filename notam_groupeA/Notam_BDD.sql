@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS degagement_vol
     idDegagement INT,
     PRIMARY KEY (idDV),
     FOREIGN KEY (idVol) REFERENCES Vol(idVol),
-    FOREIGN KEY (idDegagement) REFERENCES aerodrome(idAerodrome)
+    FOREIGN KEY (idDegagement) REFERENCES aerodrome(idAerodrome) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS Vol_User
@@ -111,7 +111,7 @@ VALUES
 INSERT INTO aerodrome (codeAerodrome,nomAerodrome,region,departement,ville,pays)
 VALUES
 ('LFBO','Blagnac','Occitanie','Haute Garonne','Toulouse','France'),
-('LFLC','Aeroport de clermont ferrand','Auvergne','Puy de domes','Clermont Ferrand','France'),
+('LFLC','Clermont Ferrand','Auvergne','Puy de domes','Clermont Ferrand','France'),
 ('LFBD','Bordeaux-Mérignac','Nouvelle Aquitaine','Gironde', 'Bordeaux','France'),
 ('LFPG','Roissy Charles-de-Gaulle','Ile-de-France',"Val d'Oise", 'Paris','France');
 
