@@ -1,0 +1,207 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% set titre="Add Vol" %}
+    {% include("layout/head.html") %}
+</head>
+<body>
+{% include("layout/navbar.html") %}
+
+<div class="hero">
+    {% include("layout/bgimg.html") %}
+
+    <div class="container" style="padding: 8em; height: 100%;">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-9 text-center">
+                <h1 class="heading" data-aos="fade-up">
+                    Add Vol
+                </h1>
+
+                <form
+                    action="/ajoutvol"
+                    class="narrow-w form-search d-flex align-items-stretch mb-3"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                    method="post"
+                >
+
+                    <div class="container">
+                        <div class="col-12 mx-auto">
+
+                            <!-- ID Vol -->
+                            <div class="row mb-2 align-items-center">
+                                <div class="col-3 text-white">
+                                    ID Vol
+                                </div>
+                                <div class="col">
+                                    <input
+                                        type="text"
+                                        id="idVol"
+                                        name="idVol"
+                                        class="form-control px-3"
+                                        placeholder="VOL ID"
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- TYPE VOL -->
+                            <div class="row mb-2 align-items-center">
+                                <div class="col-3 text-white">
+                                    Type Vol
+                                </div>
+                                <div class="col">
+                                    <select
+                                        id="typeVol"
+                                        name="typeVol"
+                                        class="form-select px-3"
+                                    >
+                                        <option value="I">VOL [IFR]</option>
+                                        <option value="V">VOL [VFR]</option>
+                                        <option value="IV">VOL [IV]</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- START AND END DATE -->
+                            <div class="row mb-2 align-items-center">
+                                <!-- <div class="col-3 text-white">
+                                    Start Date and end Date
+                                </div> -->
+                                <div class="text-white">
+                                    Dates
+                                </div>
+                                <div class="col-6">
+                                    <input
+                                        type="datetime-local"
+                                        id="dateStartVol"
+                                        name="dateStartVol"
+                                        class="form-control px-3"
+                                    />
+                                </div>
+                                <div class="col-6">
+                                    <input
+                                        type="datetime-local"
+                                        id="dateEndVol"
+                                        name="dateEndVol"
+                                        class="form-control px-3"
+                                    />
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-2 align-items-center">
+                                <div class="col-3 text-white">
+                                    Nom du Vol
+                                </div>
+                                <div class="col">
+                                    <input
+                                        type="text"
+                                        id="nameVol"
+                                        name="nameVol"
+                                        class="form-control px-3"
+                                        placeholder="Nom du Vol"
+                                    />
+                                </div>
+                            </div> 
+
+                            <!-- Créneau -->
+                            <div class="row mb-3 justify-content-center align-items-center">
+                                <!-- <div class="col-3 text-white">
+                                    Start Date
+                                </div> -->
+                                <div class="text-white">
+                                    Creneau
+                                </div>
+                                <div class="col-3">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        max="23"
+                                        step="1"
+                                        id="startCreneau"
+                                        name="startCreneau"
+                                        class="form-control px-3"
+                                        placeholder="0 - 23 H"
+                                    />
+                                </div>
+                                <div class="col-auto text-white">
+                                    -
+                                </div>
+                                <div class="col-3">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        max="23"
+                                        step="1"
+                                        id="endCreneau"
+                                        name="endCreneau"
+                                        class="form-control px-3"
+                                        placeholder="0 - 23 H"
+                                    />
+                                </div>
+                            </div>
+
+                            
+
+                           
+
+                            <!-- AERODROME -->
+                            <div class="row mb-2 align-items-center">
+                                <div class="col-3 text-white">
+                                    Airports
+                                </div>
+                                <div class="col">
+                                    <select
+                                        type="text"
+                                        id="airportdepart"
+                                        name="airportdepart"
+                                        class="form-select px-3"
+                                        placeholder="Departure"
+                                    >
+                                        {% for ap in airports %}
+                                        <option value="{{ap['idAerodrome']}}" id="departure">{{ap['nomAerodrome']}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+
+                                <div class="col">
+                                    <select
+                                        type="text"
+                                        id="airportarrival"
+                                        name="airportarrival"
+                                        class="form-select px-3"
+                                        placeholder="Arrival"
+                                    >
+                                        {% for ap in airports %}
+                                        <option value="{{ap['idAerodrome']}}" id="arrival">{{ap['nomAerodrome']}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- BUTTON -->
+                            <div class="col mx-auto mt-3">
+                                <button type="submit" class="btn btn-primary">
+                                    Add
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include("layout/footer.html") %}
+</body>
+</html>
