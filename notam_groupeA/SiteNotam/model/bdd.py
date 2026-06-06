@@ -112,20 +112,20 @@ def get_notams():
     return r if r!=None else []
 
 def get_vols():
-    # Renvoie la liste de tous les vols
+    # Renvoie la liste des notams d'un aérodrome
     sql = f"SELECT * FROM Vol"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
 def get_notamsVol(idAero):
-    # Renvoie la liste de tous les vols
+    # Renvoie la liste de tous les notams d'un aérodrome
     sql = "SELECT * FROM Notam WHERE idAerodrome=%s"
     param = (idAero,)
     r = bddGen.selectData(func_name(), sql, param)
     return r if r!=None else []
 
 def get_deroutement(idVol):
-    # Renvoie la liste de tous les aérodromes de déroutement d'un vol
+    # Renvoie la liste de tous les notams des aérodromes de déroutement d'un vol
     l = []
     sql = "SELECT * FROM degagement_vol WHERE idVol=%s"
     param = (idVol,)
@@ -185,3 +185,27 @@ def update_ceilingData(idNotam, newvalue):
     sql = "UPDATE Notam SET limite_superieur=%s WHERE idNotam=%s;"
     param = (newvalue, idNotam)
     return bddGen.updateData(func_name(), sql, param, None)
+
+def get_tousLesVols(idUser):
+    # Renvoie la liste de tous les vols d'un utilisateur
+    sql = "SELECT * FROM vol_user WHERE idUser=%s"
+    param = (idUser,)
+    r = bddGen.selectData(func_name(), sql, param)
+    return r if r!=None else []
+
+def get_aeroVol(idVol):
+    # Renvoie la liste de tous les aérodromes d'un vol
+    sql = "SELECT idDepart, idArrivee FROM vol WHERE idVol=%s"
+    param = (idVol,)
+    r = bddGen.selectData(func_name(), sql, param)
+    return r[0] if r!=None else []
+
+def get_idDeroute(idVol):
+    # Renvoie la liste de tous les aéroports de dégagement d'un vol
+    l = []
+    sql = "SELECT idDegagement FROM degagement_vol WHERE idVol=%s"
+    param = (idVol,)
+    r = bddGen.selectData(func_name(), sql, param)
+    for i in r:
+        l.append(i['idDegagement'])
+    return l if l!=None else []
