@@ -63,8 +63,8 @@ def ajouterAirport():
     rform = request.form
     if request.method == "POST":
         msg= {
-            "ok":"Nouvel Aeroport inséré",
-            "echec":"Problème ajout Aeroport"
+            "ok":"New airport created",
+            "echec":"Airport addition problem"
         }
         try :
             bdd.add_airportData(rform,msg)
@@ -116,12 +116,12 @@ def modifMdp():
             if bdd.verifAuthData(session['login'], ancien):
                 bdd.update_userMdpData(new_mdp_hash, session["idUser"])
             
-                flash("BRAVO MDP modified", "success")
+                flash("Password modified", "success")
             else:
-                flash("Mot de passe erroné!", "danger")
+                flash("Wrong Password", "danger")
             return redirect("/modifMdp")
         else:
-            flash("Les deux mots de passe ne correspondent pas!", "danger")
+            flash("Passwords doesn't match ", "danger")
             return redirect("/modifMdp")
     return render_template("modifMdp.html")
 
