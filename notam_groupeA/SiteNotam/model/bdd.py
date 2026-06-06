@@ -145,6 +145,7 @@ def get_noms():
     r = bddGen.selectData(func_name(), sql, None)
     for i in r:
         dictnoms[i["idAerodrome"]] = i["nomAerodrome"]
+    dictnoms['null'] = ''
     return dictnoms if dictnoms!=None else []
 
 def get_oaci():
