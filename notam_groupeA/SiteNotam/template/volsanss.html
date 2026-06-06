@@ -77,9 +77,10 @@
                 <h1 class="heading" data-aos="fade-up">
                     {{noms[notamsarr[0]["idAerodrome"]]}}
                 </h1>
+                {% if notamsarr[0]["idAerodrome"] != 'null' %}
                 <div id="notamsarr" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="container-fluid text-center" data-aos="fade-up">
                     <div style="overflow-y: scroll; height: 30vh;">
-                        {%for i in notamsarr%}
+                        {%for i in notamsarr %}
                         <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
                             style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
                             <div class="col text-truncate">{{i['idNotam']}} - {{i['typeNotam']}} | {{i['description']}}
@@ -99,6 +100,7 @@
                         {% endfor %}
                     </div>
                 </div>
+                {% endif %}
                 <h1 class="heading">
                     Rerouting airports
                 </h1>

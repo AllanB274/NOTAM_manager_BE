@@ -42,8 +42,8 @@ def signup():
     rform = request.form
     if request.method == "POST":
         msg= {
-            "ok":"Nouveau membre inséré",
-            "echec":"Problème ajout utilisateur"
+            "ok":"Account created",
+            "echec":"Account refused"
         }
         try :
             bdd.add_membreData(rform,msg)
@@ -143,25 +143,25 @@ def connect():
         session['login'] = user['login']
         session["statut"] = user["role"]
         session["avatar"] = user["avatar"]
-        flash("Authentification réussie", "success")
+        flash("Authentication successful", "success")
         return redirect("/vols")
     except TypeError as err:
         #Refus
-        flash("Authentification refusée", "danger")
+        flash("Authentication refused", "danger")
         return redirect("/compte")
 
 #la déconnexion
 @app.route("/deco")
 def deco():
     session.clear()
-    flash("Vous êtes bien déconnecté.", "info")
+    flash("Disconnected.", "info")
     return redirect("/compte")
 
 @app.route("/suppNotam/<idNotam>")
 def suppNotam(idNotam):
     msg= {
-        "ok":"Le notam a bien été supprimé",
-        "echec":"Problème suppression notam"
+        "ok":"The NOTAM has been successfully deleted.",
+        "echec":"Notam deletion problem"
     }
     bdd.del_notamData(idNotam,msg)
     return redirect("/notam")
@@ -169,8 +169,8 @@ def suppNotam(idNotam):
 @app.route("/suppAeroport/<idAeroport>")
 def suppAeroport(idAeroport):
     msg= {
-        "ok":"L'aéroport' a bien été supprimé",
-        "echec":"Problème suppression aéroport"
+        "ok":"The airport has been successfully deleted",
+        "echec":"Airport deletion problem"
     }
     bdd.del_aeroportData(idAeroport,msg)
     return redirect("/notam")
@@ -178,8 +178,8 @@ def suppAeroport(idAeroport):
 @app.route("/suppVol/<idVol>")
 def suppVol(idVol):
     msg= {
-        "ok":"Le vol a bien été supprimé",
-        "echec":"Problème suppression vol"
+        "ok":"The flight has been successfully cancelled.",
+        "echec":"Flight cancellation problem"
     }
     bdd.del_volData(idVol,msg)
     return redirect("/vols")
@@ -194,30 +194,41 @@ def versvol():
         session["idArrivee"] = vol["idArrivee"]
         session["idDepart"] = vol["idDepart"]
         session["idVol"] = vol["idVol"]
-        flash("Bon voyage", "success")
+        flash("Have a nice flight", "success")
         return redirect("/volsanss")
     except TypeError as err:
         #Refus
-        flash("Le vol n'existe pas", "danger")
-        return redirect("/")
+        session["idArrivee"] = arrival
+        session["idDepart"] = departure
+        session["idVol"] = None
+        flash("Have a nice flight", "success")
+        return redirect("/volsanss")
 
 @app.route("/volsanss")
 def volSansS():
     dictidaero, dictnotamsparaero = {}, {}
     lnotamvolsdep = bdd.get_notamsVol(session["idDepart"])
     lnotamvolsarr = bdd.get_notamsVol(session["idArrivee"])
-    lnotamderoutement = bdd.get_deroutement(session["idVol"])
     lnoms = bdd.get_noms()
-    for i,v in enumerate(lnotamderoutement):
-        if v["idAerodrome"] in dictidaero.keys():
-            dictidaero[v["idAerodrome"]] += 1
+    if session["idDepart"] == session["idArrivee"]:
+        dictnotamsparaero = {}
+        dictidaero = {}
+        lnotamvolsarr = [{"idAerodrome":'null'}]
+    else:
+        if session["idVol"] == None :
+            lnotamderoutement = []
         else:
-            dictidaero[v["idAerodrome"]] = 1
-    for i in lnotamderoutement:
-        if i["idAerodrome"] in dictnotamsparaero.keys():
-            dictnotamsparaero[i["idAerodrome"]].append(i)
-        else:
-            dictnotamsparaero[i["idAerodrome"]] = [i]
+            lnotamderoutement = bdd.get_deroutement(session["idVol"])
+        for i,v in enumerate(lnotamderoutement):
+            if v["idAerodrome"] in dictidaero.keys():
+                dictidaero[v["idAerodrome"]] += 1
+            else:
+                dictidaero[v["idAerodrome"]] = 1
+        for i in lnotamderoutement:
+            if i["idAerodrome"] in dictnotamsparaero.keys():
+                dictnotamsparaero[i["idAerodrome"]].append(i)
+            else:
+                dictnotamsparaero[i["idAerodrome"]] = [i]
     return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr, notamsderoute=dictnotamsparaero, dictid=dictidaero, noms=lnoms)
 
 @app.route("/editNotam", methods=["POST"])
