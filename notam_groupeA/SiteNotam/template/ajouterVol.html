@@ -186,6 +186,30 @@
                                 </div>
                             </div>
 
+
+                             <div class="row mb-2 align-items-center">
+                                <div class="col-3 text-white">
+                                    Dégagements
+                                </div>
+                                <div class="col">
+                                    <select
+                                        name="degagements[]"
+                                        id="degagements"
+                                        class="form-select"
+                                        multiple
+                                        size="6"
+                                    >
+                                        {% for ap in airports %}
+                                        <option value="{{ ap['idAerodrome'] }}">
+                                            {{ ap['codeAerodrome'] }} - {{ ap['nomAerodrome'] }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            
+
                             <!-- BUTTON -->
                             <div class="col mx-auto mt-3">
                                 <button type="submit" class="btn btn-primary">
