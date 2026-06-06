@@ -42,8 +42,8 @@ def signup():
     rform = request.form
     if request.method == "POST":
         msg= {
-            "ok":"Nouveau membre inséré",
-            "echec":"Problème ajout utilisateur"
+            "ok":"Account created",
+            "echec":"Account refused"
         }
         try :
             bdd.add_membreData(rform,msg)
@@ -126,25 +126,25 @@ def connect():
         session['login'] = user['login']
         session["statut"] = user["role"]
         session["avatar"] = user["avatar"]
-        flash("Authentification réussie", "success")
+        flash("Authentication successful", "success")
         return redirect("/vols")
     except TypeError as err:
         #Refus
-        flash("Authentification refusée", "danger")
+        flash("Authentication refused", "danger")
         return redirect("/compte")
 
 #la déconnexion
 @app.route("/deco")
 def deco():
     session.clear()
-    flash("Vous êtes bien déconnecté.", "info")
+    flash("Disconnected.", "info")
     return redirect("/compte")
 
 @app.route("/suppNotam/<idNotam>")
 def suppNotam(idNotam):
     msg= {
-        "ok":"Le notam a bien été supprimé",
-        "echec":"Problème suppression notam"
+        "ok":"The NOTAM has been successfully deleted.",
+        "echec":"Notam deletion problem"
     }
     bdd.del_notamData(idNotam,msg)
     return redirect("/notam")
@@ -152,8 +152,8 @@ def suppNotam(idNotam):
 @app.route("/suppAeroport/<idAeroport>")
 def suppAeroport(idAeroport):
     msg= {
-        "ok":"L'aéroport' a bien été supprimé",
-        "echec":"Problème suppression aéroport"
+        "ok":"The airport has been successfully deleted",
+        "echec":"Airport deletion problem"
     }
     bdd.del_aeroportData(idAeroport,msg)
     return redirect("/notam")
@@ -161,8 +161,8 @@ def suppAeroport(idAeroport):
 @app.route("/suppVol/<idVol>")
 def suppVol(idVol):
     msg= {
-        "ok":"Le vol a bien été supprimé",
-        "echec":"Problème suppression vol"
+        "ok":"The flight has been successfully cancelled.",
+        "echec":"Flight cancellation problem"
     }
     bdd.del_volData(idVol,msg)
     return redirect("/vols")
@@ -177,11 +177,11 @@ def versvol():
         session["idArrivee"] = vol["idArrivee"]
         session["idDepart"] = vol["idDepart"]
         session["idVol"] = vol["idVol"]
-        flash("Bon voyage", "success")
+        flash("Have a nice flight", "success")
         return redirect("/volsanss")
     except TypeError as err:
         #Refus
-        flash("Le vol n'existe pas", "danger")
+        flash("The flight doesn't exists", "danger")
         return redirect("/")
 
 @app.route("/volsanss")

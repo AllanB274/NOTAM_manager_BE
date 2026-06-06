@@ -18,13 +18,13 @@
           <li class="{{ 'active' if request.endpoint == 'index' else '' }}"><a href="/">Home</a></li>
           <li class="{{ 'active' if request.endpoint == 'aboutus' else '' }}"><a href="/aboutus">About Us</a></li>
           <li class="{{ 'active' if request.endpoint == 'notam' else '' }}"><a href="/notam">Notams</a></li>
-          <!-- <li class="{{ 'active' if request.endpoint == 'vols' else '' }}"><a href="/vols">Vols</a></li> -->
+          <!-- <li class="{{ 'active' if request.endpoint == 'vols' else '' }}"><a href="/vols">Flights</a></li> -->
           {% if not session['idUser'] %}
           <li class="{{ 'active' if request.endpoint == 'compte' else '' }}"><a href="/compte">Log In</a></li>
           <li class="{{ 'active' if request.endpoint == 'signup' else '' }}"><a href="/signup">Sign Up</a></li>
           {% endif %}
           {% if session['idUser'] %}
-          <li class="{{ 'active' if request.endpoint == 'vols' else '' }}"><a href="/vols">Vols</a></li>
+          <li class="{{ 'active' if request.endpoint == 'vols' else '' }}"><a href="/vols">Flights</a></li>
           <li class="{{ 'active' if request.endpoint == 'deco' else '' }}"><a href="/deco">Sign out</a></li>
           {% endif %}
         </ul>
