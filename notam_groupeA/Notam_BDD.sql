@@ -132,9 +132,15 @@ VALUES
 
 INSERT INTO Vol(typeVol, nomVol, idUser, idDepart, idArrivee, date_depart, date_arrivee)
 VALUES
-('I', 'la mère de Ryan', 1, 2, 3, "2026-01-01 00:00:00", "2026-01-01 00:00:01");
+('I', 'la mère de Ryan', 1, 2, 3, "2026-01-01 00:00:00", "2026-01-01 00:00:01"),
+('I', 'la mère de Ryan contre-attaque', 1, 1, 4, "2026-01-01 00:00:00", "2026-01-01 00:00:01");
 
 INSERT INTO degagement_vol(idVol, idDegagement)
 VALUES
 ('1', '1'),
 ('1', '4');
+
+INSERT INTO vol_user(idVol, idUser)
+VALUES
+('1', '1'),
+('2', '1');
