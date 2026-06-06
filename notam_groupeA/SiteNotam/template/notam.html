@@ -76,13 +76,15 @@
         </div>
 
 
-        <div class="container">
+        <div class="container pt-5" data-aos="fade-up">
             <div class="row justify-content-center align-items-center">
                 <!-- <div id="filtre">
 
             </div> -->
+            <div class="col-12 justify-content-center align-items-center">
+                <div class="row py-3">
                 <div id="notams" style="background-color: rgba(43, 43, 43, 0.5);width:75%" class="col-6"
-                    data-aos="fade-up">
+                    >
                     <div style="overflow-y: scroll; height: 60vh;">
                         {%for i in notams%}
                         <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
@@ -92,7 +94,7 @@
                             <button
                                 class="open-modal-notam col-auto px-{% if session['statut'] in ['gestion', 'admin'] %}2{% else %}4{% endif%}"
                                 type="button"
-                                data-notam="{{i | tojson}}"
+                                data-notam='{{i | tojson}}'
                                 data-bs-toggle="modal"
                                 data-bs-target="#ModalNotam"><i class="bi bi-eye"></i></button>
                             {% if session['statut']!='client' and session['idUser'] %}
@@ -105,7 +107,7 @@
                     </div>
                 </div>
                 <div id="airports" style="background-color: rgba(43, 43, 43, 0.5); width:25%;" class="col-4"
-                    data-aos="fade-up">
+                    >
                     <div style="overflow-y: scroll; height: 60vh;">
                         {% for a in airports %}
                         <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
@@ -125,6 +127,11 @@
                         {% endfor %}
                     </div>
                 </div>
+                </div>
+                <div class="row">
+                    <h5 class="text-white justify-content-center align-items-center"><a style="color:rgba(200, 200, 200, 0.58)" href="/ajouterNotam">Add a NOTAM</a></h5>
+                </div>
+            </div>
             </div>
         </div>
     </div>

@@ -76,10 +76,27 @@ def ajouterAirport():
     else:
         return render_template("ajouterAirport.html")
 
-@app.route("/ajouterNotam")
+@app.route("/ajouterNotam", methods=["POST", "GET"])
 def ajouterNotam():
-    airports = bdd.get_airports()
-    return render_template("ajouterNotam.html", airports=airports)
+    if request.method == "GET":
+        airports = bdd.get_airports()
+        objects = bdd.get_objects()
+        return render_template("ajouterNotam.html", airports=airports, objects=objects)
+    else:
+        rform = request.form
+        msg= {
+            "ok":"New Notam added",
+            "echec":"Error while adding the Notam"
+        }
+        try :
+            # raise("la")
+            bdd.add_notamData(rform,session,msg)
+            return redirect("/notam")
+        except TypeError as err:
+        #Refus
+            flash("Notam refused", "danger")
+            flash(str(err), "danger")
+            return redirect("/ajouterNotam")
 
 # about us
 @app.route("/aboutus")

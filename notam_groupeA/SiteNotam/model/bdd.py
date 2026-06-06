@@ -1,6 +1,7 @@
 from . import bddGen
 import inspect
 import hashlib
+from datetime import datetime
 
 # -----------------------------------
 # Retourne le nom de la fonction courante
@@ -59,6 +60,69 @@ def add_membreData(rform, msg=None):
     return bddGen.addData(func_name(), sql, param, msg)
 
 
+def add_notamData(rform, session, msg=None):
+    idUser = session['idUser']
+    idNotam = rform.get("idNotam")
+    typeNotam = rform.get("typeNotam")
+    dateStartNotam = rform.get("dateStartNotam")
+    dateEndNotam = rform.get("dateEndNotam")
+    startCreneau = rform.get("startCreneau")
+    endCreneau = rform.get("endCreneau")
+    creneau = startCreneau+'H-'+endCreneau+'H'
+    descNotam = rform.get("descNotam")
+    lowerFLNotam = rform.get("lowerFLNotam")
+    upperFLNotam = rform.get("upperFLNotam")
+    airport = rform.get("airport")
+    object = rform.get("object")
+    flightTypes = "".join(sorted(rform.getlist("flightType")))
+    
+    sql = """
+        INSERT INTO Notam
+        (
+            idNotam,
+            typeNotam,
+            date_debut,
+            date_fin,
+            creneau,
+            description,
+            limite_inferieur,
+            limite_superieur,
+            typeVol,
+            idAerodrome,
+            idUser,
+            idObjet
+        )
+        VALUES
+        (
+            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+        );
+    """
+    param = (idNotam, typeNotam, dateStartNotam, dateEndNotam, creneau, descNotam, lowerFLNotam, upperFLNotam, flightTypes, airport, idUser, object)
+    
+    for a in param:
+        if a=='':
+            raise TypeError("Please fill all the fields")
+    
+    try:
+        int(idNotam)
+    except:
+        raise TypeError("Please choose a valid ID")
+    
+    if datetime.strptime(dateEndNotam, "%Y-%m-%dT%H:%M") < datetime.strptime(dateStartNotam, "%Y-%m-%dT%H:%M"):
+        raise TypeError("Please select a valid date range")
+    
+    if int(endCreneau)-int(startCreneau)<0:
+        raise TypeError("Please select a valid time slot")
+
+    if int(lowerFLNotam)>int(upperFLNotam):
+        raise TypeError("Please select a valid levels range")
+    
+    sql2 = "SELECT * FROM notam WHERE idNotam=%s"
+    param2 = (idNotam,)
+    if bddGen.selectOneData(func_name(), sql2, param2):
+        raise TypeError("A Notam with this ID already exists")
+    
+    return bddGen.addData(func_name(), sql, param, msg)
 
 def del_notamData(idNotam, msg=None):
     sql = "DELETE FROM Notam WHERE idNotam=%s;"
@@ -101,7 +165,13 @@ def update_notam(idNotam, newdesc):
 
 def get_airports():
     # Renvoie la liste de tous les aéroports
-    sql = f"SELECT idAerodrome, nomAerodrome FROM aerodrome"
+    sql = f"SELECT * FROM aerodrome"
+    r = bddGen.selectData(func_name(), sql, None, None)
+    return r if r!=None else []
+
+def get_objects():
+    # Renvoie la liste de tous les objets
+    sql = "SELECT * FROM objets"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
