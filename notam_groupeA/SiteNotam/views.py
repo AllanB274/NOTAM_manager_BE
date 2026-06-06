@@ -29,13 +29,6 @@ def notam():
     print(type(lcodes[lnotam[1]['idAerodrome']]))
     return render_template("notam.html", notams=lnotam, airports=lairports, codes=lcodes)
 
-# page sgbd
-@app.route("/vols")
-@f.statuts_obligatoires('admin', 'client')
-def vols():
-    lvols = bdd.get_vols()
-    return render_template("vols.html", vols=lvols)
-
 # log in
 @app.route("/compte")
 @f.statuts_interdits('admin', 'client')
@@ -92,31 +85,6 @@ def ajouterNotam():
 @app.route("/aboutus")
 def aboutus():
     return render_template("aboutus.html")
-
-# @app.route("/addmdp")
-# def addmdp():
-#     rform = request.form
-#     msg={
-#         "ok": "Mot de passe valide",
-#         "echec" : "Mot de passe invalide"
-#     }
-    
-#     #genere mdp aléatoire de 5 caractères
-#     caracteres = string.ascii_letters + string.digits
-#     mdp = ''.join(secrets.choice(caracteres) for _ in range(5))
-#     print("Mot de passe généré:", mdp)
-    
-#     #Chiffrement SHA-256
-#     mdp_hash = hashlib.sha256(mdp.encode()).hexdigest()
-#     print("Mot de passe chiffré:", mdp_hash)
-   
-    
-#     #création user
-#     idUser = bdd.add_userData(rform, mdp_hash, msg)
-#     print(idUser)
-#     flash(mdp)
-#     return redirect("/modifMdp")
-
 
 @app.route("/modifMdp", methods=["POST", "GET"])
 @f.statuts_obligatoires('admin', 'client')
@@ -203,8 +171,6 @@ def suppVol(idVol):
 def versvol():
     departure = request.form.get('departure2')
     arrival = request.form.get('arrival2')
-    print(arrival, len(arrival), "arr")
-    print(departure, len(departure), "dep")
     vol = bdd.verifVolExist(departure, arrival)
     try:
         #Réussite
@@ -298,3 +264,28 @@ def updateCeiling():
     newvalue = request.form['value']
     bdd.update_ceilingData(idNotam, newvalue)
     return "1"
+
+@app.route("/vols")
+def vols():
+    dictidaero, dictidderoute, lidvol, dictidvol = {}, {}, [], {}
+    dictderoute, dictliste, lnomspremache = {}, {}, {}
+    lnoms = bdd.get_noms()
+    lvolsuser = bdd.get_tousLesVols(session["idUser"])
+    for i in lvolsuser:
+        lidvol.append(i['idVol'])
+    # dictidaero : dictionnaire de dictionnaires de listes de dictionnaires {idVol1 : {idAero1 : [notam1, notam2], idAero2 : [notam1, notam2]}, idVol2 : etc...}
+    # pareil avec dictidderoute
+    for i in lidvol:
+        dictidaero[i] = {bdd.get_aeroVol(i)['idDepart'] : bdd.get_notamsVol(bdd.get_aeroVol(i)['idDepart']), bdd.get_aeroVol(i)['idArrivee'] : bdd.get_notamsVol(bdd.get_aeroVol(i)['idArrivee'])}
+        dictderoute[i] = bdd.get_idDeroute(i)
+        lnomspremache[i] = [lnoms[bdd.get_aeroVol(i)['idDepart']], lnoms[bdd.get_aeroVol(i)['idArrivee']]]
+        dictidvol[i] = [bdd.get_aeroVol(i)['idDepart'], bdd.get_aeroVol(i)['idArrivee']]
+    for k,v in dictderoute.items():
+        if len(v) == 0:
+            dictidderoute[k] = {}
+        else:
+            for j in v:
+                dictliste[j] = bdd.get_notamsVol(j)
+            dictidderoute[k] = dictliste
+
+    return render_template("vols.html", notamsaero=dictidaero, notamsderoute=dictidderoute, noms=lnoms, idvols=lidvol, nomspm=lnomspremache, idpm=dictidvol)
