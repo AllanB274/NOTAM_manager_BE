@@ -181,26 +181,37 @@ def versvol():
         return redirect("/volsanss")
     except TypeError as err:
         #Refus
-        flash("The flight doesn't exists", "danger")
-        return redirect("/")
+        session["idArrivee"] = arrival
+        session["idDepart"] = departure
+        session["idVol"] = None
+        flash("Have a nice flight", "success")
+        return redirect("/volsanss")
 
 @app.route("/volsanss")
 def volSansS():
     dictidaero, dictnotamsparaero = {}, {}
     lnotamvolsdep = bdd.get_notamsVol(session["idDepart"])
     lnotamvolsarr = bdd.get_notamsVol(session["idArrivee"])
-    lnotamderoutement = bdd.get_deroutement(session["idVol"])
     lnoms = bdd.get_noms()
-    for i,v in enumerate(lnotamderoutement):
-        if v["idAerodrome"] in dictidaero.keys():
-            dictidaero[v["idAerodrome"]] += 1
+    if session["idDepart"] == session["idArrivee"]:
+        dictnotamsparaero = {}
+        dictidaero = {}
+        lnotamvolsarr = [{"idAerodrome":'null'}]
+    else:
+        if session["idVol"] == None :
+            lnotamderoutement = []
         else:
-            dictidaero[v["idAerodrome"]] = 1
-    for i in lnotamderoutement:
-        if i["idAerodrome"] in dictnotamsparaero.keys():
-            dictnotamsparaero[i["idAerodrome"]].append(i)
-        else:
-            dictnotamsparaero[i["idAerodrome"]] = [i]
+            lnotamderoutement = bdd.get_deroutement(session["idVol"])
+        for i,v in enumerate(lnotamderoutement):
+            if v["idAerodrome"] in dictidaero.keys():
+                dictidaero[v["idAerodrome"]] += 1
+            else:
+                dictidaero[v["idAerodrome"]] = 1
+        for i in lnotamderoutement:
+            if i["idAerodrome"] in dictnotamsparaero.keys():
+                dictnotamsparaero[i["idAerodrome"]].append(i)
+            else:
+                dictnotamsparaero[i["idAerodrome"]] = [i]
     return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr, notamsderoute=dictnotamsparaero, dictid=dictidaero, noms=lnoms)
 
 @app.route("/editNotam", methods=["POST"])
