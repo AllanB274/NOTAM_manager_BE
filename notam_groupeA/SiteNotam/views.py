@@ -317,3 +317,30 @@ def vols():
             dictidderoute[k] = dictliste
 
     return render_template("vols.html", notamsaero=dictidaero, notamsderoute=dictidderoute, noms=lnoms, idvols=lidvol, nomspm=lnomspremache, idpm=dictidvol)
+
+
+
+
+
+@app.route("/ajoutvol", methods=["POST"])
+def ajoutvol():
+    rform = request.form
+    msg = {
+        "ok": "Flight successfully added",
+        "echec": "Long live the DGAC"
+    }
+
+    try:
+        # Ajout du vol
+        idVol = bdd.add_volData(rform, session, msg)
+
+        # dégagements
+        degagements = rform.getlist("degagements[]")
+        bdd.add_degagementsData(idVol, degagements, msg)
+
+        flash("Flight and déroutements successfully added", "success")
+        return redirect("/vols")
+
+    except TypeError as err:
+        flash("Flight denied", "danger")
+        return redirect("/vols")
