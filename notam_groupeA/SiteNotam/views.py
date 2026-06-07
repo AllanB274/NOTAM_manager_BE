@@ -348,4 +348,8 @@ def ajoutvol():
           return redirect("/vols")
     
     else:
-        return render_template("ajouterVol.html")
+        lairports = bdd.get_airports()
+        lcodes = bdd.get_oaci()
+        return render_template("ajouterVol.html",airports = lairports, codes = lcodes)
+
+        
