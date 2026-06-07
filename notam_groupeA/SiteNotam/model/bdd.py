@@ -183,6 +183,15 @@ def add_degagementsData(idVol, degagements, msg=None):
         param = (idVol, idDegagement)
         bddGen.addData(func_name(), sql, param, msg)
 
+def add_volUserData(idVol, idUser, msg=None):
+    sql = """
+        INSERT INTO vol_user
+        (idVol, idUser)
+        VALUES (%s, %s);
+    """
+    param = (idVol, idUser)
+    return bddGen.addData(func_name(), sql, param, msg)
+
 
 
 def add_airportData(rform, msg=None):

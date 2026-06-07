@@ -338,7 +338,9 @@ def ajoutvol():
 
           # dégagements
           degagements = rform.getlist("degagements[]")
+          bdd.add_volUserData(idVol, session["idUser"], msg)
           bdd.add_degagementsData(idVol, degagements, msg)
+            
 
           flash("Flight and déroutements successfully added", "success")
           return redirect("/vols")
