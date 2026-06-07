@@ -139,6 +139,52 @@ def del_volData(idVol, msg=None):
     param = (idVol,)
     return bddGen.deleteData(func_name(),sql, param, msg)
 
+def add_volData(rform, session, msg=None):
+    sql = """
+        INSERT INTO Vol
+        (typeVol, nomVol, idUser, idDepart, idArrivee, date_depart, date_arrivee)
+        VALUES (%s, %s, %s, %s, %s, %s, %s);
+    """
+    param = (
+        rform.get("typeVol"),
+        rform.get("nameVol"),
+        session["idUser"],
+        rform.get("airportdepart"),
+        rform.get("airportarrival"),
+        rform.get("dateStartVol"),
+        rform.get("dateEndVol")
+    )
+    # Ne pas laissez de champs libres
+    for a in param:
+        if a == '':
+            raise TypeError("remplir les champs exigez")
+
+    # Vérifie que le vol n’existe pas déjà avec le même départ, arrivée et les dates.
+    sql2 = """
+        SELECT * FROM Vol
+        WHERE idDepart=%s AND idArrivee=%s AND date_depart=%s AND date_arrivee=%s
+    """
+    param_verif = (rform.get("airportdepart"), rform.get("airportarrival"), rform.get("dateStartVol"), rform.get("dateEndVol"))
+    if bddGen.selectOneData(func_name(), sql2, param_verif):
+        raise TypeError("Vol already exists")
+
+    return bddGen.addData(func_name(), sql, param, msg)
+
+
+
+def add_degagementsData(idVol, degagements, msg=None):
+    sql = """
+        INSERT INTO degagement_vol
+        (idVol, idDegagement)
+        VALUES (%s, %s);
+    """
+    #ajout des aérodromes de dégagement appartenant à la liste
+    for idDegagement in degagements:
+        param = (idVol, idDegagement)
+        bddGen.addData(func_name(), sql, param, msg)
+
+
+
 def add_airportData(rform, msg=None):
     sql = """ INSERT INTO aerodrome
     (codeAerodrome, nomAerodrome, region, departement, ville, pays)
