@@ -322,25 +322,30 @@ def vols():
 
 
 
-@app.route("/ajoutvol", methods=["POST"])
+@app.route("/ajoutvol", methods=["POST","GET"])
 def ajoutvol():
     rform = request.form
-    msg = {
-        "ok": "Flight successfully added",
-        "echec": "Long live the DGAC"
-    }
+    if request.method == "POST":
 
-    try:
-        # Ajout du vol
-        idVol = bdd.add_volData(rform, session, msg)
+        msg = {
+          "ok": "Flight successfully added",
+          "echec": "Long live the DGAC"
+        }
 
-        # dégagements
-        degagements = rform.getlist("degagements[]")
-        bdd.add_degagementsData(idVol, degagements, msg)
+        try:
+          # Ajout du vol
+          idVol = bdd.add_volData(rform, session, msg)
 
-        flash("Flight and déroutements successfully added", "success")
-        return redirect("/vols")
+          # dégagements
+          degagements = rform.getlist("degagements[]")
+          bdd.add_degagementsData(idVol, degagements, msg)
 
-    except TypeError as err:
-        flash("Flight denied", "danger")
-        return redirect("/vols")
+          flash("Flight and déroutements successfully added", "success")
+          return redirect("/vols")
+
+        except TypeError as err:
+          flash("Flight denied", "danger")
+          return redirect("/vols")
+    
+    else:
+        return render_template("ajouterVol.html")
