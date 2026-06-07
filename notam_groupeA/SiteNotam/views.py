@@ -57,8 +57,8 @@ def signup():
 
 
 # ajouterAirport
-
 @app.route("/ajouterAirport", methods=["POST", "GET"])
+@f.statuts_obligatoires('admin')
 def ajouterAirport():
     rform = request.form
     if request.method == "POST":
@@ -77,6 +77,7 @@ def ajouterAirport():
         return render_template("ajouterAirport.html")
 
 @app.route("/ajouterNotam", methods=["POST", "GET"])
+@f.statuts_obligatoires('admin', 'client')
 def ajouterNotam():
     if request.method == "GET":
         airports = bdd.get_airports()
@@ -158,6 +159,7 @@ def deco():
     return redirect("/compte")
 
 @app.route("/suppNotam/<idNotam>")
+@f.statuts_obligatoires('admin')
 def suppNotam(idNotam):
     msg= {
         "ok":"The NOTAM has been successfully deleted.",
@@ -167,6 +169,7 @@ def suppNotam(idNotam):
     return redirect("/notam")
 
 @app.route("/suppAeroport/<idAeroport>")
+@f.statuts_obligatoires('admin')
 def suppAeroport(idAeroport):
     msg= {
         "ok":"The airport has been successfully deleted",
@@ -176,6 +179,7 @@ def suppAeroport(idAeroport):
     return redirect("/notam")
 
 @app.route("/suppVol/<idVol>")
+@f.statuts_obligatoires('admin', 'client')
 def suppVol(idVol):
     msg= {
         "ok":"The flight has been successfully cancelled.",
@@ -294,6 +298,7 @@ def updateCeiling():
     return "1"
 
 @app.route("/vols")
+@f.statuts_obligatoires('admin', 'client')
 def vols():
     dictidaero, dictidderoute, lidvol, dictidvol = {}, {}, [], {}
     dictderoute, dictliste, lnomspremache = {}, {}, {}
@@ -323,6 +328,7 @@ def vols():
 
 
 @app.route("/ajoutvol", methods=["POST","GET"])
+@f.statuts_obligatoires('admin', 'client')
 def ajoutvol():
     rform = request.form
     if request.method == "POST":
