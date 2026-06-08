@@ -6,59 +6,69 @@
 */ -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    {% set titre="Home Page" %}
-    {% include("layout/head.html") %}
-  </head>
-  <body>
-    {% include("layout/navbar.html") %}
 
-    <div class="hero">
-      {% include("layout/bgimg.html") %}
+<head>
+  {% set titre="Home Page" %}
+  {% include("layout/head.html") %}
+</head>
 
-      <div class="container">
-        <div class="row justify-content-center align-items-center">
-          <div class="col-lg-9 text-center">
-            <h1 class="heading" data-aos="fade-up">
-              Easiest way to reach home safely
-            </h1>
-            <form
-              action="/versvol"
-              class="narrow-w form-search d-flex align-items-stretch mb-3"
-              data-aos="fade-up"
-              data-aos-delay="200"
-              method="post"
-            >
-              <select
-                type="text"
-                id="departure"
-                name="departure2"
-                class="form-select px-4 mx-2"
-                placeholder="Departure"
-              >
+<body>
+  {% include("layout/navbar.html") %}
+
+  <div class="hero">
+    {% include("layout/bgimg.html") %}
+
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-9 text-center">
+          <h1 class="heading" data-aos="fade-up">
+            Easiest way to reach home safely
+          </h1>
+          <form action="/versvol" class="narrow-w form-search mb-3" data-aos="fade-up" data-aos-delay="200"
+            method="post">
+            <div class="d-flex align-items-stretch">
+              <select id="departure" name="departure2" class="form-select px-4 mx-2">
                 {% for ap in airports %}
-                <option value="{{ap['idAerodrome']}}" id="departure">{{ap['nomAerodrome']}}</option>
+                <option value="{{ap['idAerodrome']}}">
+                  {{ap['nomAerodrome']}}
+                </option>
                 {% endfor %}
               </select>
-              <select
-                type="text"
-                id="arrival"
-                name="arrival2"
-                class="form-select px-4 mx-2"
-                placeholder="Arrival"
-              >
+
+              <select id="arrival" name="arrival2" class="form-select px-4 mx-2">
                 {% for ap in airports %}
-                <option value="{{ap['idAerodrome']}}" id="arrival">{{ap['nomAerodrome']}}</option>
+                <option value="{{ap['idAerodrome']}}">
+                  {{ap['nomAerodrome']}}
+                </option>
                 {% endfor %}
               </select>
-              <button type="submit" class="btn btn-primary">Check</button>
-            </form>
-          </div>
+
+              <button type="submit" class="btn btn-primary">
+                Check
+              </button>
+            </div>
+
+            <!-- Nouveau bouton sur une autre ligne -->
+            <div class="mt-3 text-center">
+              <h5 class="text-white">
+                Alternate airports
+              </h5>
+              <select name="degagements[]" id="degagements" class="form-select" multiple size="6">
+                {% for ap in airports %}
+                <option value="{{ ap['idAerodrome'] }}">
+                  {{ ap['codeAerodrome'] }} - {{ ap['nomAerodrome'] }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
 
-    {% include("layout/footer.html") %}
-  </body>
+  {% include("layout/footer.html") %}
+</body>
+
 </html>
