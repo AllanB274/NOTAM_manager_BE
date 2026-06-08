@@ -193,7 +193,6 @@ def versvol():
     departure = request.form.get('departure2')
     arrival = request.form.get('arrival2')
     deroutements = request.form.getlist("degagements[]")
-    flash(deroutements)
     vol = bdd.verifVolExist(departure, arrival)
     try:
         #Réussite
@@ -230,7 +229,6 @@ def volSansS():
                 lnotamderoutement+=bdd.get_notamsVol(i)
         else:
             lnotamderoutement = bdd.get_deroutement(session["idVol"])
-        flash(lnotamderoutement)
         for i,v in enumerate(lnotamderoutement):
             if v["idAerodrome"] in dictidaero.keys():
                 dictidaero[v["idAerodrome"]] += 1
