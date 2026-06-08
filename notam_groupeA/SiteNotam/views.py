@@ -335,20 +335,20 @@ def ajoutvol():
 
         msg = {
           "ok": "Flight successfully added",
-          "echec": "Long live the DGAC"
+          "echec": "error creating flight"
         }
 
         try:
           # Ajout du vol
-          idVol = bdd.add_volData(rform, session, msg)
+          idVol = bdd.add_volData(rform, session, None)
 
           # dégagements
           degagements = rform.getlist("degagements[]")
-          bdd.add_volUserData(idVol, session["idUser"], msg)
-          bdd.add_degagementsData(idVol, degagements, msg)
+          bdd.add_volUserData(idVol, session["idUser"], None)
+          bdd.add_degagementsData(idVol, degagements, None)
             
 
-          flash("Flight and déroutements successfully added", "success")
+          flash("Flight successfully added", "success")
           return redirect("/vols")
 
         except TypeError as err:
