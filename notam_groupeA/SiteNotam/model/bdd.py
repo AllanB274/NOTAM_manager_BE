@@ -232,7 +232,7 @@ def get_objects():
 
 def get_notams():
     # Renvoie la liste de tous les notams
-    sql = f"SELECT * FROM Notam"
+    sql = f"SELECT notam.*, objets.nomObjet FROM notam JOIN objets ON notam.idObjet=objets.idObjet"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 

@@ -34,6 +34,7 @@
                         <p>Start date : <span id="modal-debut"></span></p>
                         <p>End date : <span id="modal-fin"></span></p>
                         <p>Time window : <span id="modal-creneau"></span></p>
+                        <p>Object : <span id="modal-object"></span></p>
                         <p>Description : <span id="modal-description"></span></p>
                         <p>Floor : <span id="modal-limiteInf"></span></p>
                         <p>Ceiling : <span id="modal-limiteSup"></span></p>
@@ -148,6 +149,7 @@
                 })
                 document.getElementById("modal-type").textContent = notam.typeNotam
                 document.getElementById("modal-creneau").textContent = notam.creneau
+                document.getElementById("modal-object").textContent = notam.nomObjet
                 document.getElementById("modal-description").textContent = notam.description
                 document.getElementById("modal-limiteInf").textContent = notam.limite_inferieur
                 document.getElementById("modal-limiteSup").textContent = notam.limite_superieur
