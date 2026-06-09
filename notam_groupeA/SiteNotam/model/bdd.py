@@ -335,3 +335,10 @@ def get_idDeroute(idVol):
     for i in r:
         l.append(i['idDegagement'])
     return l if l!=None else []
+
+def get_infoVol(idVol):
+    # Renvoie les infos d'un vol
+    sql = "SELECT * FROM Vol WHERE idVol=%s"
+    param = (idVol,)
+    r = bddGen.selectData(func_name(), sql, param)
+    return r[0] if r!=None else []
