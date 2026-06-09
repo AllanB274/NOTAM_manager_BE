@@ -241,6 +241,35 @@ def volSansS():
                 dictnotamsparaero[i["idAerodrome"]] = [i]
     return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr, notamsderoute=dictnotamsparaero, dictid=dictidaero, noms=lnoms)
 
+@app.route("/gotovolsanss", methods=["POST"])
+@f.statuts_obligatoires('admin', 'client')
+def gotoVolSansS():
+    dictidaero, dictnotamsparaero = {}, {}
+    vol = request.form['transfertvol']
+    lnoms = bdd.get_noms()
+    volinfos = []
+    temp = ''
+    for i in vol:
+        if i != '$':
+            temp += i
+        else:
+            volinfos.append(temp)
+            temp = ''
+    lnotamvolsdep = bdd.get_notamsVol(volinfos[1])
+    lnotamvolsarr = bdd.get_notamsVol(volinfos[2])
+    lnotamderoutement = bdd.get_deroutement(volinfos[0])
+    for i,v in enumerate(lnotamderoutement):
+        if v["idAerodrome"] in dictidaero.keys():
+            dictidaero[v["idAerodrome"]] += 1
+        else:
+            dictidaero[v["idAerodrome"]] = 1
+    for i in lnotamderoutement:
+        if i["idAerodrome"] in dictnotamsparaero.keys():
+            dictnotamsparaero[i["idAerodrome"]].append(i)
+        else:
+            dictnotamsparaero[i["idAerodrome"]] = [i]
+    return render_template("volsanss.html", notamsdep=lnotamvolsdep, notamsarr=lnotamvolsarr, notamsderoute=dictnotamsparaero, dictid=dictidaero, noms=lnoms)
+
 @app.route("/editNotam", methods=["POST"])
 @f.statuts_obligatoires('admin')
 def editNotam():
@@ -306,29 +335,13 @@ def updateCeiling():
 @app.route("/vols")
 @f.statuts_obligatoires('admin', 'client')
 def vols():
-    dictidaero, dictidderoute, lidvol, dictidvol = {}, {}, [], {}
-    dictderoute, dictliste, lnomspremache = {}, {}, {}
-    lnoms = bdd.get_noms()
-    lvolsuser = bdd.get_tousLesVols(session["idUser"])
-    for i in lvolsuser:
-        lidvol.append(i['idVol'])
-    # dictidaero : dictionnaire de dictionnaires de listes de dictionnaires {idVol1 : {idAero1 : [notam1, notam2], idAero2 : [notam1, notam2]}, idVol2 : etc...}
-    # pareil avec dictidderoute
-    for i in lidvol:
-        dictidaero[i] = {bdd.get_aeroVol(i)['idDepart'] : bdd.get_notamsVol(bdd.get_aeroVol(i)['idDepart']), bdd.get_aeroVol(i)['idArrivee'] : bdd.get_notamsVol(bdd.get_aeroVol(i)['idArrivee'])}
-        dictderoute[i] = bdd.get_idDeroute(i)
-        lnomspremache[i] = [lnoms[bdd.get_aeroVol(i)['idDepart']], lnoms[bdd.get_aeroVol(i)['idArrivee']]]
-        dictidvol[i] = [bdd.get_aeroVol(i)['idDepart'], bdd.get_aeroVol(i)['idArrivee']]
-    for k,v in dictderoute.items():
-        if len(v) == 0:
-            dictidderoute[k] = {}
-        else:
-            for j in v:
-                dictliste[j] = bdd.get_notamsVol(j)
-            dictidderoute[k] = dictliste
-
-    return render_template("vols.html", notamsaero=dictidaero, notamsderoute=dictidderoute, noms=lnoms, idvols=lidvol, nomspm=lnomspremache, idpm=dictidvol)
-
+    listevols, listeinfovol = [], []
+    tousvols = bdd.get_tousLesVols(session["idUser"])
+    for i in tousvols:
+        listevols.append(i['idVol'])
+    for i in listevols:
+        listeinfovol.append(bdd.get_infoVol(i))
+    return render_template("vols.html", vols=listeinfovol)
 
 
 
