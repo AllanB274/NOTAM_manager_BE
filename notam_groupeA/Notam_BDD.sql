@@ -118,8 +118,14 @@ VALUES
 
 INSERT INTO Objets(nomObjet)
 VALUES
-('cochon volant'),
-('travaux');
+('cochons volant'),
+('parachutisme'),
+('voltige'),
+('incident bord de pistes'),
+('piste fermée'),
+('presence animale ou humaine'),
+('travaux'),
+('autre');
 
 INSERT INTO Notam(idNotam, typeNotam, date_debut, date_fin, creneau, description, limite_inferieur, limite_superieur, typeVol, idAerodrome, idUser, idObjet)
 VALUES
