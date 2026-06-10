@@ -29,7 +29,7 @@
                             {%for i in vols%}
                             <div class="row justify-content-center align-items-center flex-nowrap gx-0 ps-1"
                                  style="background-color: rgba(240, 240, 250, 0.9); margin-top:3px">
-                                <div class="col text-truncate">{{i['idVol']}} - {{i['typeVol']}} | {{i['date_depart']}} - {{i['date_arrivee']}}
+                                <div class="col text-truncate">{{i['idVol']}} - {{i['typeVol']}} - {{i['nomVol']}} | {{i['date_depart']}} - {{i['date_arrivee']}}
                                 </div>
                                 <form class="col-auto px-2" action="gotovolsanss" method="POST"><button class="col-auto px-2" type="submit" name="transfertvol" value="{{i['idVol']}}${{i['idDepart']}}${{i['idArrivee']}}$"><i class="bi bi-eye"></i></button></form>
                                 {% if session['statut']!='client' and session['idUser'] %}
