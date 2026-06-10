@@ -26,7 +26,6 @@ def notam():
     lnotam = bdd.get_notams()
     lairports = bdd.get_airports()
     lcodes = bdd.get_oaci()
-    print(type(lcodes[lnotam[1]['idAerodrome']]))
     return render_template("notam.html", notams=lnotam, airports=lairports, codes=lcodes)
 
 # log in
