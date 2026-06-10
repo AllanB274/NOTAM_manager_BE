@@ -103,10 +103,10 @@ CREATE TABLE IF NOT EXISTS Vol_User
 
 
 
-INSERT INTO User (prenom,nom,mdp,login,role)
+INSERT INTO User (prenom,nom,mdp,login,role,avatar)
 VALUES
-('Luc','Leugotte','f8638b979b2f4f793ddb6dbd197e0ee25a7a6ea32b0ae22f5e3c5d119d839e75', 'Lu', 'admin'),
-('Allan','Gromolet','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Al', 'client');
+('Admin','Admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin', 'admin','6.png'),
+('user','user','04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb', 'user', 'client','11.png');
 
 INSERT INTO aerodrome (codeAerodrome,nomAerodrome,region,departement,ville,pays)
 VALUES
