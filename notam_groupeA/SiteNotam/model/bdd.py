@@ -117,7 +117,7 @@ def add_notamData(rform, session, msg=None):
     if int(lowerFLNotam)>int(upperFLNotam):
         raise TypeError("Please select a valid levels range")
     
-    sql2 = "SELECT * FROM notam WHERE idNotam=%s"
+    sql2 = "SELECT * FROM Notam WHERE idNotam=%s"
     param2 = (idNotam,)
     if bddGen.selectOneData(func_name(), sql2, param2):
         raise TypeError("A Notam with this ID already exists")
@@ -185,7 +185,7 @@ def add_degagementsData(idVol, degagements, msg=None):
 
 def add_volUserData(idVol, idUser, msg=None):
     sql = """
-        INSERT INTO vol_user
+        INSERT INTO Vol_User
         (idVol, idUser)
         VALUES (%s, %s);
     """
@@ -226,13 +226,13 @@ def get_airports():
 
 def get_objects():
     # Renvoie la liste de tous les objets
-    sql = "SELECT * FROM objets"
+    sql = "SELECT * FROM Objets"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
 def get_notams():
     # Renvoie la liste de tous les notams
-    sql = f"SELECT notam.*, objets.nomObjet FROM notam JOIN objets ON notam.idObjet=objets.idObjet"
+    sql = f"SELECT notam.*, objets.nomObjet FROM Notam JOIN Objets ON notam.idObjet=objets.idObjet"
     r = bddGen.selectData(func_name(), sql, None, None)
     return r if r!=None else []
 
@@ -314,14 +314,14 @@ def update_ceilingData(idNotam, newvalue):
 
 def get_tousLesVols(idUser):
     # Renvoie la liste de tous les vols d'un utilisateur
-    sql = "SELECT * FROM vol_user WHERE idUser=%s"
+    sql = "SELECT * FROM Vol_User WHERE idUser=%s"
     param = (idUser,)
     r = bddGen.selectData(func_name(), sql, param)
     return r if r!=None else []
 
 def get_aeroVol(idVol):
     # Renvoie la liste de tous les aérodromes d'un vol
-    sql = "SELECT idDepart, idArrivee FROM vol WHERE idVol=%s"
+    sql = "SELECT idDepart, idArrivee FROM Vol WHERE idVol=%s"
     param = (idVol,)
     r = bddGen.selectData(func_name(), sql, param)
     return r[0] if r!=None else []

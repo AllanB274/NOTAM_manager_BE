@@ -140,7 +140,7 @@ VALUES
 ('1', '1'),
 ('1', '4');
 
-INSERT INTO vol_user(idVol, idUser)
+INSERT INTO Vol_User(idVol, idUser)
 VALUES
 ('1', '1'),
 ('2', '1');
